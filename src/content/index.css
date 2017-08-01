@@ -1,0 +1,4 @@
+div > h3 > a:first-child,
+td > a.pn {
+  border: 1px solid #f00;
+}

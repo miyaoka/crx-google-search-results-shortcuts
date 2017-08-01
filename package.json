@@ -14,6 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "postcss-loader": "^2.0.6",
     "vue": "^2.3.3",
     "vue-router": "^2.6.0",
     "write-file-webpack-plugin": "^4.1.0"

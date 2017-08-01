@@ -19,7 +19,10 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.google.co.jp/*"
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/search?*"
       ],
       "js": [
         "js/content.js"
