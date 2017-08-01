@@ -16,7 +16,8 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    content: './src/content/index.dev'
+    content: './src/content/index.dev',
+    content_hmr: './src/content'
   },
   output: {
     path: config.build.assetsRoot,

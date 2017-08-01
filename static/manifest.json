@@ -3,6 +3,7 @@
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "manifest_version": 2,
+  "version": "1.0.0",
   "icons": {
     "16": "icons/16.png",
     "48": "icons/48.png",
@@ -18,7 +19,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.google.*/*"
+        "https://*.google.co.jp/*"
       ],
       "js": [
         "js/content.js"
