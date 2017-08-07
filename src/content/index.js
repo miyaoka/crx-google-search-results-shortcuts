@@ -6,14 +6,14 @@ const searchInput = document.querySelector('#lst-ib')
 
 // Constant var
 const LAST_INDEX = links.length - 1
-const FORWARD_KEYS = ['ArrowDown', 'KeyJ']
-const PREV_KEYS = ['ArrowUp', 'KeyK']
+const DOWN_KEYS = ['ArrowDown', 'KeyJ']
+const UP_KEYS = ['ArrowUp', 'KeyK']
 const SEARCH_KEY = 'Slash'
 
 // Methods
 const focus = (i) => links[i].focus()
-const focusForward = () => focus(focusIndex = Math.min(focusIndex + 1, LAST_INDEX))
-const focusPrev = () => focus(focusIndex = Math.max(focusIndex - 1, 0))
+const focusDown = () => focus(focusIndex = Math.min(focusIndex + 1, LAST_INDEX))
+const focusUp = () => focus(focusIndex = Math.max(focusIndex - 1, 0))
 const focusInput = () => {
   searchInput.focus()
   searchInput.select()
@@ -32,10 +32,10 @@ const init = () => {
         focusInput()
         break
       default:
-        if (FORWARD_KEYS.includes(e.code)) {
-          focusForward()
-        } else if (PREV_KEYS.includes(e.code)) {
-          focusPrev()
+        if (DOWN_KEYS.includes(e.code)) {
+          focusDown()
+        } else if (UP_KEYS.includes(e.code)) {
+          focusUp()
         } else {
           return
         }
