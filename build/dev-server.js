@@ -28,6 +28,8 @@ var app = express()
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
 
+  require('./generate-manifest')()
+
   var compiler = webpack(webpackConfig)
 
   var devMiddleware = require('webpack-dev-middleware')(compiler, {
