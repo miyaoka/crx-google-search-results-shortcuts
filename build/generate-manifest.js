@@ -9,6 +9,15 @@ module.exports = function () {
     version: process.env.npm_package_version,
   })
 
+  if (process.env.NODE_ENV === 'development') {
+    Object.assign(manifest, {
+      background: {
+        scripts: [
+          'js/hot-reload.js'
+        ]
+      }
+    })
+  }
   fs.emptyDirSync(config.build.assetsRoot)
 
   fs.writeFileSync(

@@ -16,8 +16,8 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    content: './src/content/index.dev',
-    content_hmr: './src/content'
+    content: './src/content',
+    'hot-reload' : './src/hot-reload'
   },
   output: {
     path: config.build.assetsRoot,

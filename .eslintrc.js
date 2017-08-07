@@ -15,6 +15,9 @@ module.exports = {
   plugins: [
     'html'
   ],
+  globals: {
+    chrome: false
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions
