@@ -24,6 +24,32 @@ const focusInput = () => {
   searchInput.focus()
   searchInput.select()
 }
+const navigateKeyHandler = e => {
+  switch (e.code) {
+    case SEARCH_KEY:
+      focusInput()
+      break
+    default:
+      if (DOWN_KEYS.includes(e.code)) {
+        focusDown()
+      } else if (UP_KEYS.includes(e.code)) {
+        focusUp()
+      } else if (RIGHT_KEYS.includes(e.code)) {
+        focusRight()
+      } else if (LEFT_KEYS.includes(e.code)) {
+        focusLeft()
+      } else {
+        return
+      }
+  }
+  // Prevent input when match some keymap
+  e.preventDefault()
+}
+const activateNavigation = isActive => {
+  isActive
+  ? document.addEventListener('keydown', navigateKeyHandler)
+  : document.removeEventListener('keydown', navigateKeyHandler)
+}
 
 let focusIndex = 0
 
@@ -32,27 +58,10 @@ const init = () => {
     return
   }
 
-  document.addEventListener('keydown', e => {
-    switch (e.code) {
-      case SEARCH_KEY:
-        focusInput()
-        break
-      default:
-        if (DOWN_KEYS.includes(e.code)) {
-          focusDown()
-        } else if (UP_KEYS.includes(e.code)) {
-          focusUp()
-        } else if (RIGHT_KEYS.includes(e.code)) {
-          focusRight()
-        } else if (LEFT_KEYS.includes(e.code)) {
-          focusLeft()
-        } else {
-          return
-        }
-    }
+  searchInput.addEventListener('focusin', () => activateNavigation(false))
+  searchInput.addEventListener('focusout', () => activateNavigation(true))
 
-    e.preventDefault()
-  })
+  activateNavigation(true)
 
   // Initialy focus top link
   focus(0)
