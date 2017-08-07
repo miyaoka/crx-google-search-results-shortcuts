@@ -24,23 +24,25 @@ const focusInput = () => {
   searchInput.focus()
   searchInput.select()
 }
+const keymap = {
+  [DOWN_KEYS]: focusDown,
+  [UP_KEYS]: focusUp,
+  [RIGHT_KEYS]: focusRight,
+  [LEFT_KEYS]: focusLeft
+}
 const navigateKeyHandler = e => {
   switch (e.code) {
     case SEARCH_KEY:
       focusInput()
       break
     default:
-      if (DOWN_KEYS.includes(e.code)) {
-        focusDown()
-      } else if (UP_KEYS.includes(e.code)) {
-        focusUp()
-      } else if (RIGHT_KEYS.includes(e.code)) {
-        focusRight()
-      } else if (LEFT_KEYS.includes(e.code)) {
-        focusLeft()
-      } else {
-        return
-      }
+      const match = Object.keys(keymap).some(keys => {
+        if (keys.includes(e.code)) {
+          keymap[keys]()
+          return true
+        }
+      })
+      if (!match) return
   }
   // Prevent input when match some keymap
   e.preventDefault()
