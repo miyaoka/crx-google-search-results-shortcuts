@@ -12,7 +12,7 @@ const DOWN_KEYS = ['ArrowDown', 'KeyJ']
 const UP_KEYS = ['ArrowUp', 'KeyK']
 const RIGHT_KEYS = ['ArrowRight', 'KeyL']
 const LEFT_KEYS = ['ArrowLeft', 'KeyH']
-const SEARCH_KEY = 'Slash'
+const SEARCH_KEYS = ['Slash']
 
 // Methods
 const focus = (i) => links[i].focus()
@@ -25,25 +25,20 @@ const focusInput = () => {
   searchInput.select()
 }
 const keymap = {
+  [SEARCH_KEYS]: focusInput,
   [DOWN_KEYS]: focusDown,
   [UP_KEYS]: focusUp,
   [RIGHT_KEYS]: focusRight,
   [LEFT_KEYS]: focusLeft
 }
 const navigateKeyHandler = e => {
-  switch (e.code) {
-    case SEARCH_KEY:
-      focusInput()
-      break
-    default:
-      const match = Object.keys(keymap).some(keys => {
-        if (keys.includes(e.code)) {
-          keymap[keys]()
-          return true
-        }
-      })
-      if (!match) return
-  }
+  const match = Object.keys(keymap).some(keys => {
+    if (keys.includes(e.code)) {
+      keymap[keys]()
+      return true
+    }
+  })
+  if (!match) return
   // Prevent input when match some keymap
   e.preventDefault()
 }
