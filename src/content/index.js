@@ -1,7 +1,7 @@
 import './index.css'
 
 // Elements
-const links = Array.from(document.querySelectorAll('div > h3 > a:first-child, td > a.pn'))
+const links = Array.from(document.querySelectorAll('div > h3.r > a, td > a.pn'))
 const nextPageLink = document.querySelector('#pnnext')
 const prevPageLink = document.querySelector('#pnprev')
 const searchInput = document.querySelector('#lst-ib')
