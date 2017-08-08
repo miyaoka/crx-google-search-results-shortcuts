@@ -45,9 +45,12 @@ const navigateKeyHandler = e => {
   e.preventDefault()
 }
 const activateNavigation = isActive => {
-  isActive
-  ? document.addEventListener('keydown', navigateKeyHandler)
-  : document.removeEventListener('keydown', navigateKeyHandler)
+  if (isActive) {
+    document.addEventListener('keydown', navigateKeyHandler)
+    focus(focusIndex = 0)
+  } else {
+    document.removeEventListener('keydown', navigateKeyHandler)
+  }
 }
 
 let focusIndex = 0
@@ -63,9 +66,6 @@ const init = () => {
   })
 
   activateNavigation(true)
-
-  // Initialy focus top link
-  focus(0)
 }
 
 init()
