@@ -5,6 +5,7 @@ const links = Array.from(document.querySelectorAll('div > h3 > a:first-child, td
 const nextPageLink = document.querySelector('#pnnext')
 const prevPageLink = document.querySelector('#pnprev')
 const searchInput = document.querySelector('#lst-ib')
+const formInputs = document.querySelectorAll('input, textarea')
 
 // Constant var
 const LAST_INDEX = links.length - 1
@@ -56,8 +57,10 @@ const init = () => {
     return
   }
 
-  searchInput.addEventListener('focusin', () => activateNavigation(false))
-  searchInput.addEventListener('focusout', () => activateNavigation(true))
+  formInputs.forEach(el => {
+    el.addEventListener('focusin', () => activateNavigation(false))
+    el.addEventListener('focusout', () => activateNavigation(true))
+  })
 
   activateNavigation(true)
 
