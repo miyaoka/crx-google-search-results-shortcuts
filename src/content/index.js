@@ -32,6 +32,7 @@ const keymap = {
   [LEFT_KEYS]: focusLeft
 }
 const navigateKeyHandler = e => {
+  if (e.metaKey) return
   const match = Object.keys(keymap).some(keys => {
     if (keys.includes(e.code)) {
       keymap[keys]()
