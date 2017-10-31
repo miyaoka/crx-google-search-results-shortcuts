@@ -29,5 +29,9 @@
       ],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  }
 }

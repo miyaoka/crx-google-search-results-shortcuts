@@ -1,7 +1,8 @@
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
-// var vueLoaderConfig = require('./vue-loader.conf')
+var vueLoaderConfig = require('./vue-loader.conf')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -9,7 +10,8 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    content: './src/content'
+    content: './src/content',
+    options: './src/options'
   },
   output: {
     path: config.build.assetsRoot,
@@ -21,6 +23,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src')
     }
   },
@@ -34,6 +37,11 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
       },
       {
         test: /\.js$/,
@@ -74,5 +82,14 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    // https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'options/index.html',
+      template: './src/options/index.html',
+      chunks: ['options'],
+      inject: true
+    })
+  ]
 }
