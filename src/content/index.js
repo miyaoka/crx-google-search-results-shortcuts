@@ -22,6 +22,7 @@ const focusLeft = () => searchResult.goPrevPage()
 const focusInput = () => {
   searchInput.focus()
   searchInput.select()
+  return true
 }
 const keymap = {
   [SEARCH_KEYS]: focusInput,
