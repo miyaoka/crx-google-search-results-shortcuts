@@ -1,14 +1,13 @@
 import './index.css'
 
 // Elements
-const links = Array.from(document.querySelectorAll('div > h3.r > a, td > a.pn'))
+const links = () => Array.from(document.querySelectorAll('div > h3.r > a:first-child, td > a.pn'))
 const nextPageLink = document.querySelector('#pnnext')
 const prevPageLink = document.querySelector('#pnprev')
 const searchInput = document.querySelector('#lst-ib')
 const formInputs = document.querySelectorAll('input, textarea')
 
 // Constant var
-const LAST_INDEX = links.length - 1
 const DOWN_KEYS = ['ArrowDown', 'KeyJ']
 const UP_KEYS = ['ArrowUp', 'KeyK']
 const RIGHT_KEYS = ['ArrowRight', 'KeyL']
@@ -16,8 +15,8 @@ const LEFT_KEYS = ['ArrowLeft', 'KeyH']
 const SEARCH_KEYS = ['Slash']
 
 // Methods
-const focus = (i) => links[i].focus()
-const focusDown = () => focus(focusIndex = Math.min(focusIndex + 1, LAST_INDEX))
+const focus = (i) => links()[i].focus()
+const focusDown = () => focus(focusIndex = Math.min(focusIndex + 1, links().length - 1))
 const focusUp = () => focus(focusIndex = Math.max(focusIndex - 1, 0))
 const focusRight = () => nextPageLink ? nextPageLink.click() : null
 const focusLeft = () => prevPageLink ? prevPageLink.click() : null
@@ -64,7 +63,7 @@ const activateNavigation = isActive => {
 let focusIndex = 0
 
 const init = () => {
-  if (links.length === 0) {
+  if (links().length === 0) {
     return
   }
 
