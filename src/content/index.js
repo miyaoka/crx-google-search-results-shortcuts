@@ -1,9 +1,9 @@
 import './index.css'
+import SearchResult from './SearchResult'
+
+const searchResult = new SearchResult()
 
 // Elements
-const links = () => Array.from(document.querySelectorAll('div > h3.r > a:first-child, td > a.pn'))
-const nextPageLink = document.querySelector('#pnnext')
-const prevPageLink = document.querySelector('#pnprev')
 const searchInput = document.querySelector('#lst-ib')
 const formInputs = document.querySelectorAll('input, textarea')
 
@@ -15,11 +15,10 @@ const LEFT_KEYS = ['ArrowLeft', 'KeyH']
 const SEARCH_KEYS = ['Slash']
 
 // Methods
-const focus = (i) => links()[i].focus()
-const focusDown = () => focus(focusIndex = Math.min(focusIndex + 1, links().length - 1))
-const focusUp = () => focus(focusIndex = Math.max(focusIndex - 1, 0))
-const focusRight = () => nextPageLink ? nextPageLink.click() : null
-const focusLeft = () => prevPageLink ? prevPageLink.click() : null
+const focusDown = () => searchResult.focusNext()
+const focusUp = () => searchResult.focusPrev()
+const focusRight = () => searchResult.goNextPage()
+const focusLeft = () => searchResult.goPrevPage()
 const focusInput = () => {
   searchInput.focus()
   searchInput.select()
@@ -54,18 +53,14 @@ const navigateKeyHandler = e => {
 const activateNavigation = isActive => {
   if (isActive) {
     document.addEventListener('keydown', navigateKeyHandler)
-    focus(focusIndex = 0)
+    searchResult.resetFocus()
   } else {
     document.removeEventListener('keydown', navigateKeyHandler)
   }
 }
 
-let focusIndex = 0
-
 const init = () => {
-  if (links().length === 0) {
-    return
-  }
+  if (searchResult.isEmpty()) return
 
   formInputs.forEach(el => {
     el.addEventListener('focusin', () => activateNavigation(false))
