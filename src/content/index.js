@@ -40,15 +40,14 @@ const navigateKeyHandler = e => {
   // Ignore when input has modifier keys
   if (modKeys.some(hasKey => hasKey)) return
 
-  const match = Object.keys(keymap).some(keys => {
+  Object.keys(keymap).some(keys => {
     if (keys.includes(e.code)) {
-      keymap[keys]()
+      if (keymap[keys]()) {
+        e.preventDefault()
+      }
       return true
     }
   })
-  if (!match) return
-  // Prevent input when match some keymap
-  e.preventDefault()
 }
 const activateNavigation = isActive => {
   if (isActive) {
