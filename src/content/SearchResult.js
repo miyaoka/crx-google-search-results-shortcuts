@@ -2,7 +2,7 @@ let focusIndex = 0
 
 export default class SearchResult {
   get items () {
-    return Array.from(document.querySelectorAll('div > h3.r > a:first-child, td > a.pn'))
+    return Array.from(document.querySelectorAll('div > h3.r > a:first-of-type, td > a.pn'))
   }
   get nextPage () {
     return document.querySelector('#pnnext')
