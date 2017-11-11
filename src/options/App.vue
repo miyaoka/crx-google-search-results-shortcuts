@@ -1,23 +1,24 @@
 <template>
-  <div id="app">
+  <div>
+    <key-editor>
+    </key-editor>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import KeyEditor from './components/KeyEditor.vue'
+
+export default Vue.extend({
   name: 'app',
   components: {
+    KeyEditor
   }
-}
+})
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  font-family: -apple-system-body, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans Japanese", "游ゴシック  Medium", "Yu Gothic Medium", "メイリオ", meiryo, sans-serif;
 }
 </style>
