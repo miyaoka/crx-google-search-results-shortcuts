@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(cmd, index) in commands" :key="index">
+    <li v-for="(cmd, index) in keyList" :key="index">
       {{cmd.name}}
       <ul>
         <li v-for="(keyInput, index) in cmd.keyInputs" :key="index">
@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import KeyInput from './KeyInput.vue'
 
 export default Vue.extend({
@@ -34,24 +35,14 @@ export default Vue.extend({
   },
   data () {
     return {
-      commands: [
-        {
-          name: 'FocusNext',
-          keyInputs: [
-            {code: 'ArrowDown'},
-            {code: 'KeyJ'}
-          ]
-        },
-        {
-          name: 'FocusPrev',
-          keyInputs: [
-            {code: 'ArrowUp'},
-            {code: 'KeyK'}
-          ]
-        }
-      ]
     }
+  },
+  computed: {
+    ...mapState([
+      'keyList'
+    ])
   }
+
 })
 </script>
 
