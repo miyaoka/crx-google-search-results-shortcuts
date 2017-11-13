@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout
       row
-      v-for="(cmd, cmdIndex) in keyList2"
+      v-for="(cmd, cmdIndex) in keyEditList"
       :key="cmdIndex"
     >
       <v-flex xs4>
@@ -17,7 +17,7 @@
           >
             <key-input
               :value="keyInput | kb"
-              @input="value => updateInput(cmdIndex, keyIndex, value)"
+              @input="(value, changed) => updateInput(cmdIndex, keyIndex, value, changed)"
             ></key-input>
             <v-btn
               flat icon color="red"
@@ -78,7 +78,7 @@ export default Vue.extend({
   },
   data: function () {
     return {
-      keyList2: JSON.parse(JSON.stringify(this.$store.getters.keyList))
+      keyEditList: JSON.parse(JSON.stringify(this.$store.getters.keyList))
     }
   },
   computed: {
@@ -88,21 +88,21 @@ export default Vue.extend({
   },
   methods: {
     isAddable (cmdIndex:number):boolean {
-      const keys = this.keyList2[cmdIndex].keyInputs
+      const keys = this.keyEditList[cmdIndex].keyInputs
       return keys[keys.length - 1].code
     },
     addInput (cmdIndex:number):void {
-      this.keyList2[cmdIndex].keyInputs.push({})
+      this.keyEditList[cmdIndex].keyInputs.push({})
     },
     removeInput (cmdIndex:number, keyIndex:number):void {
-      this.keyList2[cmdIndex].keyInputs.splice(keyIndex, 1)
+      this.keyEditList[cmdIndex].keyInputs.splice(keyIndex, 1)
     },
-    updateInput (cmdIndex:number, keyIndex:number, value:KeyCode):void {
-      this.keyList2[cmdIndex].keyInputs.splice(keyIndex, 1, value)
+    updateInput (cmdIndex:number, keyIndex:number, value:KeyCode, changed:boolean):void {
+      this.keyEditList[cmdIndex].keyInputs.splice(keyIndex, 1, value)
     }
   },
   filters: {
-    kb (val):KeyCode {
+    kb (val:KeyboardEvent):KeyCode {
       return KeyCode.fromKeyboardEvent(val)
     }
   }

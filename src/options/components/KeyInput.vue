@@ -3,7 +3,7 @@
     readonly
     single-line
     @keydown="onKeyDown"
-    :value="keyLabel"
+    :value="pressedKey | keyLabel"
     :prefix="isChanged ? '*' : ''"
     :append-icon="isChanged ? 'backspace' : ''"
     :append-icon-cb="restore"
@@ -16,21 +16,6 @@ import Vue from 'vue'
 import KeyCode from './KeyCode'
 
 const metaKeys = ['Alt', 'Control', 'Meta', 'Shift']
-
-const toLabel = (keyCode: KeyCode): string => {
-  const { ctrlKey, metaKey, altKey, shiftKey, key, code } = keyCode
-  return [
-    ctrlKey && 'CTRL',
-    metaKey && 'META',
-    altKey && 'ALT',
-    shiftKey && 'SHIFT',
-    key && key.match(/^[\x21-\x7F]$/)
-      ? key.toUpperCase()
-      : code && code.replace(/^(Key|Digit)/, '')
-  ]
-    .filter(v => v)
-    .join(' + ')
-}
 
 export default Vue.extend({
   name: 'KeyInput',
@@ -71,14 +56,27 @@ export default Vue.extend({
       },
       set: function (value: KeyCode) {
         if (!this.origValue) this.origValue = this.value
-        this.$emit('input', value)
+        this.$emit('input', value, !this.origValue.match(value))
       }
-    },
-    keyLabel (): string {
-      return toLabel(this.pressedKey)
     },
     isChanged (): boolean {
       return this.origValue && !(this.origValue.match(this.value))
+    }
+  },
+  filters: {
+    keyLabel (keyCode: KeyCode): string {
+      const { ctrlKey, metaKey, altKey, shiftKey, key, code } = keyCode
+      return [
+        ctrlKey && 'CTRL',
+        metaKey && 'META',
+        altKey && 'ALT',
+        shiftKey && 'SHIFT',
+        key && key.match(/^[\x21-\x7F]$/)
+          ? key.toUpperCase()
+          : code && code.replace(/^(Key|Digit)/, '')
+      ]
+      .filter(v => v)
+      .join(' + ')
     }
   }
 })

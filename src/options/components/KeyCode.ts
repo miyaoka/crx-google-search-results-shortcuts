@@ -13,12 +13,12 @@ export default class KeyCode {
 
   public static fromKeyboardEvent(e:KeyboardEvent):KeyCode {
     const kc = new KeyCode()
-    kc.key = e.key
-    kc.code = e.code
-    kc.altKey = e.altKey
-    kc.ctrlKey = e.ctrlKey
-    kc.metaKey = e.metaKey
-    kc.shiftKey = e.shiftKey
+    kc.key = e.key || ''
+    kc.code = e.code || ''
+    kc.altKey = e.altKey || null
+    kc.ctrlKey = e.ctrlKey || null
+    kc.metaKey = e.metaKey || null
+    kc.shiftKey = e.shiftKey || null
     return kc
   }
 }
