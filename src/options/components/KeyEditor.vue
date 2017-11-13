@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout
       row
-      v-for="(cmd, cmdIndex) in keyEditList"
+      v-for="(cmd, cmdIndex) in keyList2"
       :key="cmdIndex"
     >
       <v-flex xs4>
@@ -17,23 +17,27 @@
           >
             <key-input
               :value="keyInput | kb"
-              @input="value => cmd.keyInputs[keyIndex] = value"
+              @input="value => updateInput(cmdIndex, keyIndex, value)"
             ></key-input>
             <v-btn
-              flat icon color="error"
+              flat icon color="red"
               @click.native="removeInput(cmdIndex, keyIndex)"
             >
               <v-icon>remove_circle</v-icon>
             </v-btn>
           </v-flex>
           <v-flex
+            color="secondary"
           >
             <v-btn
-              flat icon color="green"
+              class="ml-0"
+              color="green"
+              dark
               @click.native="addInput(cmdIndex)"
               :disabled="!isAddable(cmdIndex)"
             >
-              <v-icon>add_circle_outline</v-icon>
+              <v-icon left>add_circle_outline</v-icon>
+              Add new key
             </v-btn>
           </v-flex>
         </v-layout>
@@ -43,13 +47,13 @@
       color="blue-grey"
       dark
     >
-      Reset to Defaults
+      Load Defaults
     </v-btn>
     <v-btn
       color="blue-grey"
       dark
     >
-      Clear
+      Reset
     </v-btn>
     <v-btn
       color="blue-grey"
@@ -65,6 +69,7 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import KeyInput from './KeyInput.vue'
+import KeyCode from './KeyCode'
 
 export default Vue.extend({
   name: 'KeyEditor',
@@ -73,7 +78,7 @@ export default Vue.extend({
   },
   data: function () {
     return {
-      keyEditList: JSON.parse(JSON.stringify(this.$store.getters.keyList))
+      keyList2: JSON.parse(JSON.stringify(this.$store.getters.keyList))
     }
   },
   computed: {
@@ -82,21 +87,23 @@ export default Vue.extend({
     ])
   },
   methods: {
-    isAddable (commandIndex:number):boolean {
-      const keys = this.keyEditList[commandIndex].keyInputs
-      console.log(keys[keys.length - 1])
+    isAddable (cmdIndex:number):boolean {
+      const keys = this.keyList2[cmdIndex].keyInputs
       return keys[keys.length - 1].code
     },
-    addInput (commandIndex:number):void {
-      this.keyEditList[commandIndex].keyInputs.push({})
+    addInput (cmdIndex:number):void {
+      this.keyList2[cmdIndex].keyInputs.push({})
     },
-    removeInput (commandIndex:number, keyIndex:number):void {
-      this.keyEditList[commandIndex].keyInputs.splice(keyIndex, 1)
+    removeInput (cmdIndex:number, keyIndex:number):void {
+      this.keyList2[cmdIndex].keyInputs.splice(keyIndex, 1)
+    },
+    updateInput (cmdIndex:number, keyIndex:number, value:KeyCode):void {
+      this.keyList2[cmdIndex].keyInputs.splice(keyIndex, 1, value)
     }
   },
   filters: {
-    kb (val):KeyboardEvent {
-      return new KeyboardEvent('keydown', val)
+    kb (val):KeyCode {
+      return KeyCode.fromKeyboardEvent(val)
     }
   }
 })
