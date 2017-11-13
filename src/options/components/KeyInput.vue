@@ -2,10 +2,11 @@
   <v-text-field
     readonly
     single-line
-    @keydown="onKeyDown"
+    placeholder="Enter new key"
+    @keydown.prevent="onKeyDown"
     :value="pressedKey | keyLabel"
-    :prefix="isChanged ? '*' : ''"
-    :append-icon="isChanged ? 'backspace' : ''"
+    :prefix="isDirty ? '*' : ''"
+    :append-icon="isDirty ? 'backspace' : ''"
     :append-icon-cb="restore"
     :rules="rules"
   ></v-text-field>
@@ -59,7 +60,7 @@ export default Vue.extend({
         this.$emit('input', value, !this.origValue.match(value))
       }
     },
-    isChanged (): boolean {
+    isDirty (): boolean {
       return this.origValue && !(this.origValue.match(this.value))
     }
   },

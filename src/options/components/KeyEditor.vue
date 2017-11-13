@@ -27,40 +27,22 @@
             </v-btn>
           </v-flex>
           <v-flex
-            color="secondary"
+            class="text-xs-center"
           >
             <v-btn
-              class="ml-0"
               color="green"
               dark
+              icon
+              small
               @click.native="addInput(cmdIndex)"
               :disabled="!isAddable(cmdIndex)"
             >
-              <v-icon left>add_circle_outline</v-icon>
-              Add new key
+              <v-icon>add</v-icon>
             </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
-    <v-btn
-      color="blue-grey"
-      dark
-    >
-      Load Defaults
-    </v-btn>
-    <v-btn
-      color="blue-grey"
-      dark
-    >
-      Reset
-    </v-btn>
-    <v-btn
-      color="blue-grey"
-      dark
-    >
-      Submit
-    </v-btn>
 
   </v-container>
 </template>
