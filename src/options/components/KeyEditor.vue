@@ -88,11 +88,11 @@ export default Vue.extend({
   },
   methods: {
     isAddable (cmdIndex:number):boolean {
-      const keys = this.keyEditList[cmdIndex].keyInputs
-      return keys[keys.length - 1].code
+      const keys:Array<KeyCode> = this.keyEditList[cmdIndex].keyInputs
+      return keys.length === 0 || keys[keys.length - 1].code !== ''
     },
     addInput (cmdIndex:number):void {
-      this.keyEditList[cmdIndex].keyInputs.push({})
+      this.keyEditList[cmdIndex].keyInputs.push(new KeyCode())
     },
     removeInput (cmdIndex:number, keyIndex:number):void {
       this.keyEditList[cmdIndex].keyInputs.splice(keyIndex, 1)
