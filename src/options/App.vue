@@ -1,8 +1,15 @@
 <template>
-  <div>
-    <key-editor>
-    </key-editor>
-  </div>
+  <v-app>
+    <main>
+      <v-content>
+        <v-container fluid>
+          <h2>Configure hotkeys</h2>
+          <key-editor>
+          </key-editor>
+        </v-container>
+      </v-content>
+    </main>
+  </v-app>
 </template>
 
 <script lang="ts">
@@ -18,7 +25,4 @@ export default Vue.extend({
 </script>
 
 <style>
-body {
-  font-family: -apple-system-body, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans Japanese", "游ゴシック  Medium", "Yu Gothic Medium", "メイリオ", meiryo, sans-serif;
-}
 </style>
