@@ -5,12 +5,9 @@
       v-for="(cmd, cmdIndex) in keyEditList"
       :key="cmdIndex"
     >
-      <v-flex xs4>
+      <v-list>
         <v-subheader>{{cmd.name}}</v-subheader>
-      </v-flex>
-      <v-flex xs8>
-        <v-layout column>
-          <v-flex
+          <v-list-tile
             d-flex
             v-for="(hotkey, keyIndex) in cmd.hotkeys"
             :key="hotkey.id"
@@ -25,23 +22,21 @@
             >
               <v-icon>remove_circle</v-icon>
             </v-btn>
-          </v-flex>
-          <v-flex
-            class="text-xs-center"
+          </v-list-tile>
+          <v-list-tile
+            color="secondary"
           >
             <v-btn
               color="green"
-              dark
+              flat
               icon
-              small
               @click.native="addInput(cmdIndex)"
               :disabled="!isAddable(cmdIndex)"
             >
-              <v-icon>add</v-icon>
+              <v-icon>add_circle_outline</v-icon>
             </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>
+          </v-list-tile>
+      </v-list>
     </v-layout>
 
   </v-container>
