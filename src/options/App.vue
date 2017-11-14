@@ -2,7 +2,7 @@
   <v-app>
     <main>
       <v-content>
-        <v-container fluid>
+        <v-container fluid style="max-width:600px">
           <h4>Configure hotkeys</h4>
           <key-editor>
           </key-editor>

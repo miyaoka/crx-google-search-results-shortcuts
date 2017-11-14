@@ -79,7 +79,7 @@
               disabled
             >
               <v-icon>check_circle</v-icon>
-              Submit
+              Save
             </v-btn>
           </v-flex>
         </v-layout>
