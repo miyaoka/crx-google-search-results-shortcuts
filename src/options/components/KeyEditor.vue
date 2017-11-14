@@ -12,11 +12,11 @@
         <v-layout column>
           <v-flex
             d-flex
-            v-for="(keyInput, keyIndex) in cmd.keyInputs"
-            :key="keyInput.id"
+            v-for="(hotkey, keyIndex) in cmd.hotkeys"
+            :key="hotkey.id"
           >
             <key-input
-              :value="keyInput.key"
+              :value="hotkey.key"
               @input="(value, changed) => updateInput(cmdIndex, keyIndex, value, changed)"
             ></key-input>
             <v-btn
@@ -51,7 +51,7 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import KeyInput from './KeyInput.vue'
-import KeyCode from './KeyCode'
+import HotKey from './HotKey'
 
 let id:number = 0
 
@@ -65,15 +65,16 @@ export default Vue.extend({
       keyEditList: this.$store.getters.keyList.map(cmd => {
         return {
           name: cmd.name,
-          keyInputs: cmd.keyInputs.map(key => {
+          hotkeys: cmd.hotkeys.map(key => {
+            const hk:HotKey = HotKey.fromKeyboardEvent(key)
             return {
-              key: KeyCode.fromKeyboardEvent(key),
+              key: hk,
+              orig: hk,
               id: id++
             }
           })
         }
       })
-      // JSON.parse(JSON.stringify(this.$store.getters.keyList))
     }
   },
   computed: {
@@ -83,25 +84,30 @@ export default Vue.extend({
   },
   methods: {
     isAddable (cmdIndex:number):boolean {
-      const keys = this.keyEditList[cmdIndex].keyInputs
+      const keys = this.keyEditList[cmdIndex].hotkeys
       return keys.length === 0 || keys[keys.length - 1].key.code !== ''
     },
     addInput (cmdIndex:number):void {
-      this.keyEditList[cmdIndex].keyInputs.push({id: id++, key: new KeyCode()})
+      this.keyEditList[cmdIndex].hotkeys.push({
+        id: id++,
+        key: new HotKey(),
+        orig: new HotKey()
+      })
     },
     removeInput (cmdIndex:number, keyIndex:number):void {
-      this.keyEditList[cmdIndex].keyInputs.splice(keyIndex, 1)
+      this.keyEditList[cmdIndex].hotkeys.splice(keyIndex, 1)
     },
-    updateInput (cmdIndex:number, keyIndex:number, value:KeyCode, changed:boolean):void {
-      this.keyEditList[cmdIndex].keyInputs.splice(keyIndex, 1, {
-        id: this.keyEditList[cmdIndex].keyInputs[keyIndex].id,
-        key: value
-      })
+    updateInput (cmdIndex:number, keyIndex:number, value:HotKey, changed:boolean):void {
+      this.keyEditList[cmdIndex].hotkeys.splice(
+        keyIndex, 1, Object.assign(this.keyEditList[cmdIndex].hotkeys[keyIndex], {
+          key: value
+        })
+      )
     }
   },
   filters: {
-    kb (val:KeyboardEvent):KeyCode {
-      return KeyCode.fromKeyboardEvent(val)
+    kb (val:KeyboardEvent):HotKey {
+      return HotKey.fromKeyboardEvent(val)
     }
   }
 })

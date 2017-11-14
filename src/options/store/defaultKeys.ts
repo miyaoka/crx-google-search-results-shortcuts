@@ -1,7 +1,7 @@
 export default [
   {
     name: 'FocusInput',
-    keyInputs: [
+    hotkeys: [
       {
         key: '/',
         code: 'Slash'
@@ -10,7 +10,7 @@ export default [
   },
   {
     name: 'FocusNext',
-    keyInputs: [
+    hotkeys: [
       {
         key: 'ArrowDown',
         code: 'ArrowDown'
@@ -23,7 +23,7 @@ export default [
   },
   {
     name: 'FocusPrev',
-    keyInputs: [
+    hotkeys: [
       {
         key: 'ArrowUp',
         code: 'ArrowUp'
@@ -36,7 +36,7 @@ export default [
   },
   {
     name: 'GoNextPage',
-    keyInputs: [
+    hotkeys: [
       {
         key: 'ArrowRight',
         code: 'ArrowRight'
@@ -49,7 +49,7 @@ export default [
   },
   {
     name: 'GoPrevPage',
-    keyInputs: [
+    hotkeys: [
       {
         key: 'ArrowLeft',
         code: 'ArrowLeft'

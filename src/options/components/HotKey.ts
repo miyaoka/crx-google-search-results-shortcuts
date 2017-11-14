@@ -1,5 +1,5 @@
 const props = ['key', 'code', 'altKey', 'ctrlKey', 'metaKey', 'shiftKey']
-export default class KeyCode {
+export default class HotKey {
   key: string = ''
   code: string = ''
   altKey: boolean = false
@@ -7,12 +7,12 @@ export default class KeyCode {
   metaKey: boolean = false
   shiftKey: boolean = false
 
-  public match (kc:KeyCode):boolean {
+  public match (kc:HotKey):boolean {
     return props.every(prop => this[prop] === kc[prop])
   }
 
-  public static fromKeyboardEvent(e:KeyboardEvent):KeyCode {
-    const kc = new KeyCode()
+  public static fromKeyboardEvent(e:KeyboardEvent):HotKey {
+    const kc = new HotKey()
     kc.key = e.key || ''
     kc.code = e.code || ''
     kc.altKey = e.altKey || false

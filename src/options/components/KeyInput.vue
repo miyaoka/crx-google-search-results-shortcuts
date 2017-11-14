@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import KeyCode from './KeyCode'
+import HotKey from './HotKey'
 
 const metaKeys = ['Alt', 'Control', 'Meta', 'Shift']
 
@@ -28,10 +28,10 @@ export default Vue.extend({
   },
   props: {
     value: {
-      type: KeyCode,
+      type: HotKey,
       required: false,
       default: function () {
-        return new KeyCode()
+        return new HotKey()
       }
     },
     valid: {
@@ -44,7 +44,7 @@ export default Vue.extend({
     onKeyDown (e: KeyboardEvent): void {
       if (e.repeat) return
       if (metaKeys.includes(e.key)) return
-      this.pressedKey = KeyCode.fromKeyboardEvent(e)
+      this.pressedKey = HotKey.fromKeyboardEvent(e)
     },
     restore (): void {
       this.pressedKey = this.origValue
@@ -52,10 +52,10 @@ export default Vue.extend({
   },
   computed: {
     pressedKey: {
-      get: function ():KeyCode {
+      get: function ():HotKey {
         return this.value
       },
-      set: function (value: KeyCode) {
+      set: function (value: HotKey) {
         if (!this.origValue) this.origValue = this.value
         this.$emit('input', value, !this.origValue.match(value))
       }
@@ -65,8 +65,8 @@ export default Vue.extend({
     }
   },
   filters: {
-    keyLabel (keyCode: KeyCode): string {
-      const { ctrlKey, metaKey, altKey, shiftKey, key, code } = keyCode
+    keyLabel (hk: HotKey): string {
+      const { ctrlKey, metaKey, altKey, shiftKey, key, code } = hk
       return [
         ctrlKey && 'CTRL',
         metaKey && 'META',
