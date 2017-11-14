@@ -3,7 +3,7 @@
     <main>
       <v-content>
         <v-container fluid>
-          <h2>Configure hotkeys</h2>
+          <h4>Configure hotkeys</h4>
           <key-editor>
           </key-editor>
         </v-container>

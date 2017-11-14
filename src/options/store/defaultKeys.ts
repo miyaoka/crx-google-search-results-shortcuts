@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'FocusInput',
+    action: 'FocusInput',
     hotkeys: [
       {
         key: '/',
@@ -9,7 +9,7 @@ export default [
     ]
   },
   {
-    name: 'FocusNext',
+    action: 'FocusNext',
     hotkeys: [
       {
         key: 'ArrowDown',
@@ -22,7 +22,7 @@ export default [
     ]
   },
   {
-    name: 'FocusPrev',
+    action: 'FocusPrev',
     hotkeys: [
       {
         key: 'ArrowUp',
@@ -35,7 +35,7 @@ export default [
     ]
   },
   {
-    name: 'GoNextPage',
+    action: 'GoNextPage',
     hotkeys: [
       {
         key: 'ArrowRight',
@@ -48,7 +48,7 @@ export default [
     ]
   },
   {
-    name: 'GoPrevPage',
+    action: 'GoPrevPage',
     hotkeys: [
       {
         key: 'ArrowLeft',

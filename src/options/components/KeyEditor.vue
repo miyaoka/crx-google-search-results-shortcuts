@@ -1,44 +1,51 @@
  <template>
   <v-container fluid>
-    <v-layout
-      row
-      v-for="(cmd, cmdIndex) in keyEditList"
-      :key="cmdIndex"
+    <v-list two-line
+      v-for="(actionItem, actionItemIndex) in keyEditList"
+      :key="actionItemIndex"
     >
-      <v-list>
-        <v-subheader>{{cmd.name}}</v-subheader>
-          <v-list-tile
-            d-flex
-            v-for="(hotkey, keyIndex) in cmd.hotkeys"
-            :key="hotkey.id"
+      <v-subheader>{{actionItem.action}}</v-subheader>
+      <v-list-tile
+        avatar
+        v-for="(hotkey, keyIndex) in actionItem.hotkeys"
+        :key="hotkey.id"
+      >
+        <v-list-tile-avatar>
+        </v-list-tile-avatar>
+        <v-list-tile-content>
+          <key-input
+            :value="hotkey.key"
+            @input="(value, changed) => updateInput(actionItemIndex, keyIndex, value, changed)"
+          ></key-input>
+        </v-list-tile-content>
+        <v-list-tile-action>
+          <v-btn
+            flat icon color="red"
+            @click.native="removeInput(actionItemIndex, keyIndex)"
           >
-            <key-input
-              :value="hotkey.key"
-              @input="(value, changed) => updateInput(cmdIndex, keyIndex, value, changed)"
-            ></key-input>
-            <v-btn
-              flat icon color="red"
-              @click.native="removeInput(cmdIndex, keyIndex)"
-            >
-              <v-icon>remove_circle</v-icon>
-            </v-btn>
-          </v-list-tile>
-          <v-list-tile
-            color="secondary"
+            <v-icon>remove_circle</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+      </v-list-tile>
+      <v-list-tile>
+        <v-list-tile-avatar>
+        </v-list-tile-avatar>
+        <v-list-tile-content
+        >
+          <v-btn
+            color="green"
+            flat
+            outline
+            @click.native="addInput(actionItemIndex)"
+            :disabled="!isAddable(actionItemIndex)"
           >
-            <v-btn
-              color="green"
-              flat
-              icon
-              @click.native="addInput(cmdIndex)"
-              :disabled="!isAddable(cmdIndex)"
-            >
-              <v-icon>add_circle_outline</v-icon>
-            </v-btn>
-          </v-list-tile>
-      </v-list>
-    </v-layout>
-
+            <v-icon>add</v-icon>
+            add
+          </v-btn>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-divider v-if="actionItemIndex + 1 < keyEditList.length"></v-divider>
+    </v-list>
   </v-container>
 </template>
 
@@ -57,10 +64,10 @@ export default Vue.extend({
   },
   data: function () {
     return {
-      keyEditList: this.$store.getters.keyList.map(cmd => {
+      keyEditList: this.$store.getters.keyList.map(actionItem => {
         return {
-          name: cmd.name,
-          hotkeys: cmd.hotkeys.map(key => {
+          action: actionItem.action,
+          hotkeys: actionItem.hotkeys.map(key => {
             const hk:HotKey = HotKey.fromKeyboardEvent(key)
             return {
               key: hk,
@@ -78,23 +85,23 @@ export default Vue.extend({
     ])
   },
   methods: {
-    isAddable (cmdIndex:number):boolean {
-      const keys = this.keyEditList[cmdIndex].hotkeys
+    isAddable (actionItemIndex:number):boolean {
+      const keys = this.keyEditList[actionItemIndex].hotkeys
       return keys.length === 0 || keys[keys.length - 1].key.code !== ''
     },
-    addInput (cmdIndex:number):void {
-      this.keyEditList[cmdIndex].hotkeys.push({
+    addInput (actionItemIndex:number):void {
+      this.keyEditList[actionItemIndex].hotkeys.push({
         id: id++,
         key: new HotKey(),
         orig: new HotKey()
       })
     },
-    removeInput (cmdIndex:number, keyIndex:number):void {
-      this.keyEditList[cmdIndex].hotkeys.splice(keyIndex, 1)
+    removeInput (actionItemIndex:number, keyIndex:number):void {
+      this.keyEditList[actionItemIndex].hotkeys.splice(keyIndex, 1)
     },
-    updateInput (cmdIndex:number, keyIndex:number, value:HotKey, changed:boolean):void {
-      this.keyEditList[cmdIndex].hotkeys.splice(
-        keyIndex, 1, Object.assign(this.keyEditList[cmdIndex].hotkeys[keyIndex], {
+    updateInput (actionItemIndex:number, keyIndex:number, value:HotKey, changed:boolean):void {
+      this.keyEditList[actionItemIndex].hotkeys.splice(
+        keyIndex, 1, Object.assign(this.keyEditList[actionItemIndex].hotkeys[keyIndex], {
           key: value
         })
       )
