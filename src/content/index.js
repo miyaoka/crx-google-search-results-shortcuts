@@ -20,8 +20,10 @@ const focusUp = () => searchResult.focusPrev()
 const focusRight = () => searchResult.goNextPage()
 const focusLeft = () => searchResult.goPrevPage()
 const focusInput = () => {
+  const val = searchInput.value
+  searchInput.value = ''
   searchInput.focus()
-  searchInput.select()
+  searchInput.value = val
   return true
 }
 const keymap = {
