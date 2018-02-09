@@ -1,38 +1,38 @@
 let focusIndex = 0
 
 export default class SearchResult {
-  get items () {
+  get items() {
     return Array.from(document.querySelectorAll('div > h3.r > a:first-of-type, td > a.pn'))
   }
-  get nextPage () {
+  get nextPage() {
     return document.querySelector('#pnnext')
   }
-  get prevPage () {
+  get prevPage() {
     return document.querySelector('#pnprev')
   }
-  isEmpty () {
+  isEmpty() {
     return this.items.length === 0
   }
-  focusNext () {
+  focusNext() {
     return this.focus(focusIndex + 1)
   }
-  focusPrev () {
+  focusPrev() {
     return this.focus(focusIndex - 1)
   }
-  goNextPage () {
+  goNextPage() {
     const link = this.nextPage
     if (link) link.click()
     return link
   }
-  goPrevPage () {
+  goPrevPage() {
     const link = this.prevPage
     if (link) link.click()
     return link
   }
-  resetFocus () {
+  resetFocus() {
     this.focus(0)
   }
-  focus (index) {
+  focus(index) {
     const items = this.items
     const inRange = index >= 0 && index < items.length
     if (inRange) {

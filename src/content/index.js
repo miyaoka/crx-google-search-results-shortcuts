@@ -33,17 +33,12 @@ const keymap = {
   [RIGHT_KEYS]: focusRight,
   [LEFT_KEYS]: focusLeft
 }
-const navigateKeyHandler = e => {
-  const modKeys = [
-    e.shiftKey,
-    e.altKey,
-    e.ctrlKey,
-    e.metaKey
-  ]
+const navigateKeyHandler = (e) => {
+  const modKeys = [e.shiftKey, e.altKey, e.ctrlKey, e.metaKey]
   // Ignore when input has modifier keys
-  if (modKeys.some(hasKey => hasKey)) return
+  if (modKeys.some((hasKey) => hasKey)) return
 
-  Object.keys(keymap).some(keys => {
+  Object.keys(keymap).some((keys) => {
     if (keys.includes(e.code)) {
       if (keymap[keys]()) {
         e.preventDefault()
@@ -52,7 +47,7 @@ const navigateKeyHandler = e => {
     }
   })
 }
-const activateNavigation = isActive => {
+const activateNavigation = (isActive) => {
   if (isActive) {
     document.addEventListener('keydown', navigateKeyHandler)
     searchResult.resetFocus()
@@ -64,7 +59,7 @@ const activateNavigation = isActive => {
 const init = () => {
   if (searchResult.isEmpty()) return
 
-  formInputs.forEach(el => {
+  formInputs.forEach((el) => {
     el.addEventListener('focusin', () => activateNavigation(false))
     el.addEventListener('focusout', () => activateNavigation(true))
   })
