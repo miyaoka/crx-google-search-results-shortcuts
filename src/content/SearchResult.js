@@ -2,7 +2,7 @@ let focusIndex = 0
 
 export default class SearchResult {
   get items() {
-    return Array.from(document.querySelectorAll('div > h3.r > a:first-of-type, td > a.pn'))
+    return Array.from(document.querySelectorAll('div > .r > a:first-of-type, td > a.pn'))
   }
   get nextPage() {
     return document.querySelector('#pnnext')
@@ -34,6 +34,7 @@ export default class SearchResult {
   }
   focus(index) {
     const items = this.items
+    console.log(items)
     const inRange = index >= 0 && index < items.length
     if (inRange) {
       focusIndex = index
