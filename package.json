@@ -6,14 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "prod": "npm run build && npm run zip",
-    "zip": "bestzip dist.zip dist/",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "zip": "bestzip dist.zip dist/"
   },
   "dependencies": {
     "postcss-loader": "^2.0.6",
@@ -22,7 +17,6 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
-    "ajv": "^5.5.2",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
@@ -36,10 +30,7 @@
     "chalk": "^2.0.1",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
-    "cross-env": "^5.0.1",
-    "cross-spawn": "^6.0.4",
     "css-loader": "^0.28.4",
-    "cssnano": "^3.10.0",
     "eslint": "^4.17.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-friendly-formatter": "^3.0.0",
