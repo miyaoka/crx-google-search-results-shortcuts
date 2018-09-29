@@ -1,9 +1,9 @@
-h3.r > a,
+.r > a,
 td > a.pn {
   outline: none;
 }
 
-h3.r > a {
+.r > a {
   &:focus {
     &::before {
       position: absolute;
