@@ -4,7 +4,7 @@ import SearchResult from './SearchResult'
 const searchResult = new SearchResult()
 
 // Elements
-const searchInput = document.querySelector('#lst-ib')
+const searchInput = document.querySelector('input[name="q"][type="text"]') 
 const formInputs = document.querySelectorAll('input, textarea')
 
 // Constant var
