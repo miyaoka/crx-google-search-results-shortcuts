@@ -6,6 +6,9 @@ export default class SearchResult {
       document.querySelectorAll('div > .r > a:first-of-type, td > a.pn')
     )
   }
+  get searchInput(): HTMLInputElement | null {
+    return document.querySelector('input[name="q"][type="text"]')
+  }
   get nextPage(): HTMLElement | null {
     return document.querySelector('#pnnext')
   }
@@ -15,7 +18,7 @@ export default class SearchResult {
   get isEmpty() {
     return this.items.length === 0
   }
-  focus(index: number) {
+  focusItem(index: number) {
     const items = this.items
     const inRange = index >= 0 && index < items.length
     if (inRange) {
@@ -25,10 +28,18 @@ export default class SearchResult {
     return inRange
   }
   focusNext() {
-    return this.focus(this.focusIndex + 1)
+    return this.focusItem(this.focusIndex + 1)
   }
   focusPrev() {
-    return this.focus(this.focusIndex - 1)
+    return this.focusItem(this.focusIndex - 1)
+  }
+  focusInput() {
+    if (!this.searchInput) return
+    const val = this.searchInput.value
+    this.searchInput.value = ''
+    this.searchInput.focus()
+    this.searchInput.value = val
+    return true
   }
   moveToNextPage() {
     return this.clickLink(this.nextPage)
@@ -41,6 +52,6 @@ export default class SearchResult {
     return link
   }
   resetFocus(): void {
-    this.focus(0)
+    this.focusItem(0)
   }
 }

@@ -3,9 +3,6 @@ import SearchResult from './searchResult'
 
 const searchResult = new SearchResult()
 
-const searchInput = document.querySelector(
-  'input[name="q"][type="text"]'
-) as HTMLInputElement | null
 const formInputs = document.querySelectorAll('input, textarea')
 
 const keyDefs: [string[], Function][] = [
@@ -13,17 +10,7 @@ const keyDefs: [string[], Function][] = [
   [['ArrowUp', 'KeyK'], () => searchResult.focusPrev()],
   [['ArrowRight', 'KeyL'], () => searchResult.moveToNextPage()],
   [['ArrowLeft', 'KeyH'], () => searchResult.moveToPrevPage()],
-  [
-    ['Slash'],
-    () => {
-      if (!searchInput) return
-      const val = searchInput.value
-      searchInput.value = ''
-      searchInput.focus()
-      searchInput.value = val
-      return true
-    }
-  ]
+  [['Slash'], () => searchResult.focusInput()]
 ]
 
 const keymap: [RegExp, Function][] = keyDefs.map(([keys, action]) => {
