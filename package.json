@@ -10,7 +10,8 @@
     "build": "yarn clear && webpack --config webpack/webpack.prod.ts",
     "clear": "rimraf ./dist",
     "lint": "eslint --ext .ts,.js,json --ignore-path .gitignore .",
-    "test": "jest"
+    "test": "jest",
+    "zip": "bestzip dist.zip dist/"
   },
   "devDependencies": {
     "@types/chrome": "0.0.91",
@@ -21,6 +22,7 @@
     "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
+    "bestzip": "^2.1.5",
     "copy-webpack-plugin": "^5.0.5",
     "crx-hotreload": "^1.0.4",
     "css-loader": "^3.4.1",
