@@ -4,14 +4,16 @@ const linkSelector = [
   'td > a.pn'
 ].join(',')
 
+const kpLinkSelector = ['g-link', '.r']
+  .map(container => `.g-blk ${container} > ${anchor}`)
+  .join(',')
+
 export default class SearchResult {
   private focusIndex = 0
 
   get items(): HTMLElement[] {
     const linkList = Array.from(document.querySelectorAll(linkSelector))
-    const kpLinkList = Array.from(
-      document.querySelectorAll(`.g-blk .r > ${anchor}`)
-    )
+    const kpLinkList = Array.from(document.querySelectorAll(kpLinkSelector))
     const nonKpLinkList = linkList.filter(item => !kpLinkList.includes(item))
 
     return nonKpLinkList as HTMLElement[]
