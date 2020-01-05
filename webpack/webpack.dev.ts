@@ -3,11 +3,7 @@ import merge from 'webpack-merge'
 import CopyPlugin from 'copy-webpack-plugin'
 import { commonConfig } from './webpack.common'
 import pkg from '../package.json'
-import webpack from 'webpack'
 
-const entry = commonConfig.entry as webpack.Entry
-
-console.log(entry)
 export default merge(commonConfig, {
   mode: 'development',
   entry: {
