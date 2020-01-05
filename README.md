@@ -4,25 +4,30 @@
 
 ## Build Setup
 
-``` bash
-# install dependencies
-npm install
+### install
 
-# serve with hot reload at localhost:8080
-npm run dev
+```bash
+yarn
+```
 
-# build for production with minification
-npm run build
+### dev
 
-# build for production and view the bundle analyzer report
-npm run build --report
+```bash
+yarn dev
+```
 
-# run unit tests
-npm run unit
+- open chrome://extensions/
+- mount ./dist directory.
+- if you change code, extension will be automatically reloaded.
 
-# run e2e tests
-npm run e2e
+### build
 
-# run all tests
-npm test
+```bash
+yarn build
+```
+
+### create zip
+
+```bash
+yarn build && yarn zip
 ```
