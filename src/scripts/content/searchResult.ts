@@ -1,10 +1,20 @@
+const anchor = 'a:first-of-type'
+const linkSelector = [
+  ...['g-link', 'div.r'].map(container => `${container} > ${anchor}`),
+  'td > a.pn'
+].join(',')
+
 export default class SearchResult {
   private focusIndex = 0
 
   get items(): HTMLElement[] {
-    return Array.from(
-      document.querySelectorAll('div > .r > a:first-of-type, td > a.pn')
+    const linkList = Array.from(document.querySelectorAll(linkSelector))
+    const kpLinkList = Array.from(
+      document.querySelectorAll(`.g-blk .r > ${anchor}`)
     )
+    const nonKpLinkList = linkList.filter(item => !kpLinkList.includes(item))
+
+    return nonKpLinkList as HTMLElement[]
   }
   get searchInput(): HTMLInputElement | null {
     return document.querySelector('input[name="q"][type="text"]')
@@ -21,11 +31,12 @@ export default class SearchResult {
   focusItem(index: number) {
     const items = this.items
     const inRange = index >= 0 && index < items.length
-    if (inRange) {
-      this.focusIndex = index
-      items[this.focusIndex].focus()
-    }
-    return inRange
+    if (!inRange) return null
+
+    this.focusIndex = index
+    const target = items[this.focusIndex]
+    target.focus()
+    return target
   }
   focusNext() {
     return this.focusItem(this.focusIndex + 1)
@@ -34,12 +45,15 @@ export default class SearchResult {
     return this.focusItem(this.focusIndex - 1)
   }
   focusInput() {
-    if (!this.searchInput) return
+    if (!this.searchInput) return null
+
+    // Focus on end of current input
     const val = this.searchInput.value
     this.searchInput.value = ''
     this.searchInput.focus()
     this.searchInput.value = val
-    return true
+
+    return this.searchInput
   }
   moveToNextPage() {
     return this.clickLink(this.nextPage)
@@ -51,7 +65,7 @@ export default class SearchResult {
     if (link) link.click()
     return link
   }
-  resetFocus(): void {
-    this.focusItem(0)
+  resetFocus() {
+    return this.focusItem(0)
   }
 }

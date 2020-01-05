@@ -1,13 +1,16 @@
+g-link > a,
 .r > a,
 td > a.pn {
   outline: none;
 }
 
+g-link > a,
 .r > a {
   &:focus {
     &::before {
       position: absolute;
       left: -20px;
+      font-size: 16px;
       content: '▶';
     }
   }
