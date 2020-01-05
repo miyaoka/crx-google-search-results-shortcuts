@@ -1,3 +1,5 @@
+$focusColor: 0px 0px 0px 5px rgba(26, 13, 171, 0.1);
+
 g-link > a,
 .r > a,
 td > a.pn {
@@ -9,19 +11,34 @@ g-link > a,
   &:focus {
     &::before {
       position: absolute;
-      left: -20px;
+      left: -25px;
       font-size: 16px;
       content: '▶';
     }
   }
 }
 
+.r > a {
+  &:focus {
+    h3 {
+      box-shadow: $focusColor;
+    }
+  }
+}
+g-link > a {
+  &:focus {
+    box-shadow: $focusColor;
+  }
+}
+
 td > a.pn {
   &:focus span:last-child {
     position: relative;
+    box-shadow: $focusColor;
+
     &::before {
       position: absolute;
-      left: -20px;
+      left: -25px;
       content: '▶';
     }
   }
