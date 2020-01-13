@@ -6,7 +6,9 @@ export class MetaSearch {
   changeParam(newParams: Record<string, string>) {
     const url = new URL(document.location.href)
     const params = url.searchParams
-    Object.entries(newParams).forEach(([key, value]) => params.set(key, value))
+    Object.entries({ start: '', ...newParams }).forEach(([key, value]) =>
+      params.set(key, value)
+    )
     location.href = url.href
   }
   searchAll() {
