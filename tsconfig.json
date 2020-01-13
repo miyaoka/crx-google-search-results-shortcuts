@@ -6,6 +6,7 @@
     "strict": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "paths": {
       "~/*": ["./src/*"]
     }
