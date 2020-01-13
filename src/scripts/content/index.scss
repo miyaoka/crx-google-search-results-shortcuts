@@ -1,32 +1,33 @@
 $focusColor: 0px 0px 0px 4px rgba(26, 13, 171, 0.1);
+$cursor: '▶';
+$focusTransform: translate(-1em, -0.1em);
+$focusTransition: ease-out 0.1s;
 
 .r > g-link > a,
-div.r > a,
+.rc > .r > a,
 td > a.pn {
   outline: none;
 }
 
-.r > g-link > a,
-div.r > a {
+// g-link a:focus,
+// a:focus h3 {
+//   box-shadow: $focusColor;
+// }
+
+.r {
+  a:focus {
     &::before {
       position: absolute;
-      left: -25px;
+      left: 0;
       font-size: 16px;
-      content: '▶';
+      transform: translateX(-1.5em);
+      content: $cursor;
     }
   }
-}
-
-div.r > a {
-  &:focus {
-    h3 {
-      box-shadow: $focusColor;
-    }
-  }
-}
-.r > g-link > a {
-  &:focus {
-    box-shadow: $focusColor;
+  &:focus-within {
+    transform: $focusTransform;
+    transition: $focusTransition;
+    overflow: visible !important;
   }
 }
 
@@ -38,7 +39,7 @@ td > a.pn {
     &::before {
       position: absolute;
       left: -25px;
-      content: '▶';
+      content: $cursor;
     }
   }
 }
