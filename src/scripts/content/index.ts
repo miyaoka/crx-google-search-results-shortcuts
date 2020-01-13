@@ -46,7 +46,6 @@ const createKeyMap = (keyDefs: KeyDefs): [RegExp, Function][] => {
 const keymap = createKeyMap(keyDefs)
 const nextKeymap = createKeyMap(nextKeyDefs)
 
-console.log(nextKeymap)
 const getCombinedKeyCode = (e: KeyboardEvent) => {
   const modKeyMap = {
     shift: e.shiftKey,
