@@ -13,22 +13,22 @@ const keyDefs: KeyDefs = [
   [['ArrowRight', 'KeyL'], () => searchResult.moveToNextPage()],
   [['ArrowLeft', 'KeyH'], () => searchResult.moveToPrevPage()],
   [['Slash'], () => searchResult.focusInput()],
-  [['KeyG'], () => metaSearch.setLeaderKey()],
+  [['KeyG'], () => metaSearch.setLeaderKey()]
+]
 
+const nextKeyDefs: KeyDefs = [
   [['KeyA'], () => metaSearch.searchAll()],
   [['KeyI'], () => metaSearch.searchImage()],
   [['KeyM'], () => metaSearch.searchMap()],
   [['KeyV'], () => metaSearch.searchVideo()],
   [['KeyN'], () => metaSearch.searchNews()]
-]
 
-const nextKeyDefs: KeyDefs = [
-  [['KeyH'], () => metaSearch.searchByTime('qdr_h')],
-  [['KeyD'], () => metaSearch.searchByTime('qdr_d')],
-  [['KeyW'], () => metaSearch.searchByTime('qdr_w')],
-  [['KeyM'], () => metaSearch.searchByTime('qdr_m')],
-  [['KeyY'], () => metaSearch.searchByTime('qdr_y')],
-  [['KeyV'], () => metaSearch.searchVerbatim()]
+  // [['KeyH'], () => metaSearch.searchByTime('qdr_h')],
+  // [['KeyD'], () => metaSearch.searchByTime('qdr_d')],
+  // [['KeyW'], () => metaSearch.searchByTime('qdr_w')],
+  // [['KeyM'], () => metaSearch.searchByTime('qdr_m')],
+  // [['KeyY'], () => metaSearch.searchByTime('qdr_y')],
+  // [['KeyV'], () => metaSearch.searchVerbatim()]
 ]
 
 const createKeyMap = (keyDefs: KeyDefs): [RegExp, Function][] => {
