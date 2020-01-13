@@ -1,14 +1,13 @@
 $focusColor: 0px 0px 0px 4px rgba(26, 13, 171, 0.1);
 
-g-link > a,
-.r > a,
+.r > g-link > a,
+div.r > a,
 td > a.pn {
   outline: none;
 }
 
-g-link > a,
-.r > a {
-  &:focus {
+.r > g-link > a,
+div.r > a {
     &::before {
       position: absolute;
       left: -25px;
@@ -18,14 +17,14 @@ g-link > a,
   }
 }
 
-.r > a {
+div.r > a {
   &:focus {
     h3 {
       box-shadow: $focusColor;
     }
   }
 }
-g-link > a {
+.r > g-link > a {
   &:focus {
     box-shadow: $focusColor;
   }
