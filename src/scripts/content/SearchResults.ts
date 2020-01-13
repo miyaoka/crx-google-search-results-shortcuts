@@ -1,6 +1,6 @@
 const anchor = 'a:first-of-type'
 const linkSelector = [
-  ...['.r > g-link', '.rc > .r'].map(container => `${container} > ${anchor}`),
+  ...['.r > g-link', 'div > .r'].map(container => `${container} > ${anchor}`),
   'td > a.pn'
 ].join(',')
 
@@ -8,7 +8,7 @@ const kpLinkSelector = ['g-link', '.r']
   .map(container => `.g-blk ${container} > ${anchor}`)
   .join(',')
 
-export default class SearchResult {
+export class SearchResults {
   private focusIndex = 0
 
   get links(): HTMLAnchorElement[] {
