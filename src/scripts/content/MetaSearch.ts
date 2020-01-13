@@ -1,3 +1,4 @@
+const defaultParams = { start: '', tbs: '', tbm: '' }
 export class MetaSearch {
   isLeaderKey = false
   setLeaderKey() {
@@ -6,7 +7,7 @@ export class MetaSearch {
   changeParam(newParams: Record<string, string>) {
     const url = new URL(document.location.href)
     const params = url.searchParams
-    Object.entries({ start: '', ...newParams }).forEach(([key, value]) =>
+    Object.entries({ ...defaultParams, ...newParams }).forEach(([key, value]) =>
       params.set(key, value)
     )
     location.href = url.href
