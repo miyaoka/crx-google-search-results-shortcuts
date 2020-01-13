@@ -1,6 +1,6 @@
 const anchor = 'a:first-of-type'
 const linkSelector = [
-  ...['.r > g-link', 'div.r'].map(container => `${container} > ${anchor}`),
+  ...['.r > g-link', '.rc > .r'].map(container => `${container} > ${anchor}`),
   'td > a.pn'
 ].join(',')
 
@@ -11,32 +11,32 @@ const kpLinkSelector = ['g-link', '.r']
 export default class SearchResult {
   private focusIndex = 0
 
-  get items(): HTMLElement[] {
+  get links(): HTMLAnchorElement[] {
     const linkList = Array.from(document.querySelectorAll(linkSelector))
     const kpLinkList = Array.from(document.querySelectorAll(kpLinkSelector))
     const nonKpLinkList = linkList.filter(item => !kpLinkList.includes(item))
 
-    return nonKpLinkList as HTMLElement[]
+    return nonKpLinkList as HTMLAnchorElement[]
   }
   get searchInput(): HTMLInputElement | null {
     return document.querySelector('input[name="q"][type="text"]')
   }
-  get nextPage(): HTMLElement | null {
+  get nextPage(): HTMLAnchorElement | null {
     return document.querySelector('#pnnext')
   }
-  get prevPage(): HTMLElement | null {
+  get prevPage(): HTMLAnchorElement | null {
     return document.querySelector('#pnprev')
   }
   get isEmpty() {
-    return this.items.length === 0
+    return this.links.length === 0
   }
   focusItem(index: number) {
-    const items = this.items
-    const inRange = index >= 0 && index < items.length
+    const links = this.links
+    const inRange = index >= 0 && index < links.length
     if (!inRange) return null
 
     this.focusIndex = index
-    const target = items[this.focusIndex]
+    const target = links[this.focusIndex]
     target.focus()
     return target
   }
@@ -63,7 +63,7 @@ export default class SearchResult {
   moveToPrevPage() {
     return this.clickLink(this.prevPage)
   }
-  private clickLink(link: HTMLElement | null) {
+  private clickLink(link: HTMLAnchorElement | null) {
     if (link) link.click()
     return link
   }
