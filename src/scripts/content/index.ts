@@ -47,12 +47,15 @@ const getCombinedKeyCode = (e: KeyboardEvent) => {
     ctrl: e.ctrlKey,
     meta: e.metaKey
   }
-  const holdingModKeys = Object.entries(modKeyMap)
-    .reduce((acc: string[], [key, isHolding]) => {
-      return isHolding ? [...acc, key] : acc
-    }, [])
+  return Object.entries(modKeyMap)
+    .reduce(
+      (acc: string[], [key, isHolding]) => {
+        return isHolding ? [...acc, key] : acc
+      },
+      [e.code]
+    )
     .sort()
-  return [...holdingModKeys, e.code].join('+')
+    .join('+')
 }
 
 const onKeyDown = (e: KeyboardEvent) => {
