@@ -8,30 +8,34 @@ const metaSearch = new MetaSearch()
 type KeyDefs = [(string | string[])[], Function][]
 
 const keyDefs: KeyDefs = [
-  [['ArrowDown', 'KeyJ'], () => searchResult.focusNext()],
-  [['ArrowUp', 'KeyK'], () => searchResult.focusPrev()],
-  [['ArrowRight', 'KeyL'], () => searchResult.moveToNextPage()],
-  [['ArrowLeft', 'KeyH'], () => searchResult.moveToPrevPage()],
-  [['Slash'], () => searchResult.focusInput()],
-  [['KeyG'], () => metaSearch.setLeaderKey()]
+  [['ArrowDown', 'j'], () => searchResult.focusNext()],
+  [['ArrowUp', 'k'], () => searchResult.focusPrev()],
+  [['ArrowRight', 'l'], () => searchResult.moveToNextPage()],
+  [['ArrowLeft', 'h'], () => searchResult.moveToPrevPage()],
+  [['/'], () => searchResult.focusInput()],
+  [['g'], () => metaSearch.setLeaderKey()]
 ]
 
 const nextKeyDefs: KeyDefs = [
-  [['KeyA'], () => metaSearch.searchAll()],
-  [['KeyI'], () => metaSearch.searchImage()],
-  [['KeyM'], () => metaSearch.searchMap()],
-  [['KeyV'], () => metaSearch.searchVideo()],
-  [['KeyN'], () => metaSearch.searchNews()],
-  [[['shift', 'KeyV']], () => metaSearch.searchVerbatim()]
+  [['a'], () => metaSearch.searchAll()],
+  [['i'], () => metaSearch.searchImage()],
+  [['m'], () => metaSearch.searchMap()],
+  [['v'], () => metaSearch.searchVideo()],
+  [['n'], () => metaSearch.searchNews()],
+  [[['shift', 'V']], () => metaSearch.searchVerbatim()]
 
-  // [['KeyH'], () => metaSearch.searchByTime('qdr_h')],
-  // [['KeyD'], () => metaSearch.searchByTime('qdr_d')],
-  // [['KeyW'], () => metaSearch.searchByTime('qdr_w')],
-  // [['KeyM'], () => metaSearch.searchByTime('qdr_m')],
-  // [['KeyY'], () => metaSearch.searchByTime('qdr_y')],
+  // [['h'], () => metaSearch.searchByTime('qdr_h')],
+  // [['d'], () => metaSearch.searchByTime('qdr_d')],
+  // [['w'], () => metaSearch.searchByTime('qdr_w')],
+  // [['m'], () => metaSearch.searchByTime('qdr_m')],
+  // [['y'], () => metaSearch.searchByTime('qdr_y')],
 ]
 
-const combineKey = (keys: string[]) => keys.sort().join('-')
+const combineKey = (keys: string[]) =>
+  keys
+    .map(key => key.toLowerCase())
+    .sort()
+    .join('-')
 const createKeyMap = (keyDefs: KeyDefs): [RegExp, Function][] => {
   return keyDefs.map(([keyCombos, action]) => {
     const pattern = keyCombos
@@ -39,12 +43,13 @@ const createKeyMap = (keyDefs: KeyDefs): [RegExp, Function][] => {
         Array.isArray(keyCombo) ? combineKey(keyCombo) : keyCombo
       )
       .join('|')
-    return [new RegExp(`^(${pattern})$`), action]
+    return [new RegExp(`^(${pattern})$`, 'i'), action]
   })
 }
 
 const keymap = createKeyMap(keyDefs)
 const nextKeymap = createKeyMap(nextKeyDefs)
+const modKeyReg = /^(shift|alt|control|meta)$/i
 
 const getCombinedKeyCode = (e: KeyboardEvent) => {
   const modKeyMap = {
@@ -57,12 +62,14 @@ const getCombinedKeyCode = (e: KeyboardEvent) => {
     (acc: string[], [key, isHolding]) => {
       return isHolding ? [...acc, key] : acc
     },
-    [e.code]
+    [e.key]
   )
   return combineKey(keys)
 }
 
 const onKeyDown = (e: KeyboardEvent) => {
+  if (modKeyReg.test(e.key)) return
+
   const code = getCombinedKeyCode(e)
 
   if (metaSearch.isLeaderKey) {
@@ -89,10 +96,10 @@ const onKeyDown = (e: KeyboardEvent) => {
 
 const activateKeyHandler = (isActive: boolean) => {
   if (isActive) {
-    document.addEventListener('keyup', onKeyDown)
+    document.addEventListener('keydown', onKeyDown)
     searchResult.resetFocus()
   } else {
-    document.removeEventListener('keyup', onKeyDown)
+    document.removeEventListener('keydown', onKeyDown)
   }
 }
 
