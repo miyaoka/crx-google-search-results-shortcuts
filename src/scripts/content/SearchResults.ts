@@ -25,8 +25,19 @@ const ignoreSelector = ['g-link', '.r']
   )
   .join(',')
 
+const focusSelector = ['g-link', '.r']
+  .map(container => `${anchorSelector(container)}:focus::before`)
+  .join(',')
+
 export class SearchResults {
   private focusIndex = 0
+  private style: HTMLStyleElement
+
+  constructor() {
+    const style = document.createElement('style')
+    document.body.appendChild(style)
+    this.style = style
+  }
 
   get links(): HTMLAnchorElement[] {
     const linkList = Array.from(document.querySelectorAll(linkSelector))
@@ -54,6 +65,9 @@ export class SearchResults {
     this.focusIndex = index
     const target = links[this.focusIndex]
     target.focus()
+
+    const content = `${this.focusIndex + 1}/${links.length} ▶`
+    this.style.innerHTML = `${focusSelector}{ content: "${content}"}`
     return target
   }
   focusNext() {
