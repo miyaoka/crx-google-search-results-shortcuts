@@ -1,9 +1,7 @@
 const anchorSelector = (container: string) =>
   `#search ${container} > a:first-of-type`
 
-const linkSelector = ['g-link', '.r']
-  .map(container => anchorSelector(container))
-  .join(',')
+const linkWrappers = ['g-link', '.r']
 
 const ignoreWrappers = [
   'table',
@@ -13,7 +11,11 @@ const ignoreWrappers = [
   'g-scrolling-carousel'
 ]
 
-const ignoreSelector = ['g-link', '.r']
+const linkSelector = linkWrappers
+  .map(container => anchorSelector(container))
+  .join(',')
+
+const ignoreSelector = linkWrappers
   .reduce(
     (acc: string[], container) => [
       ...acc,
@@ -25,7 +27,7 @@ const ignoreSelector = ['g-link', '.r']
   )
   .join(',')
 
-const focusSelector = ['g-link', '.r']
+const focusSelector = linkWrappers
   .map(container => `${anchorSelector(container)}:focus::before`)
   .join(',')
 
