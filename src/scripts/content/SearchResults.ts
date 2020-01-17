@@ -1,7 +1,6 @@
 const anchor = 'a:first-of-type'
 const linkSelector = [
-  ...['.r > g-link', 'div > .r'].map(container => `${container} > ${anchor}`),
-  'td > a.pn'
+  ...['.r > g-link', 'div > .r'].map(container => `${container} > ${anchor}`)
 ].join(',')
 
 const kpLinkSelector = ['g-link', '.r']
