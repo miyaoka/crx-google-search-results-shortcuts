@@ -13,7 +13,8 @@ const keyDefs: KeyDefs = [
   [['ArrowRight', 'l'], () => searchResult.moveToNextPage()],
   [['ArrowLeft', 'h'], () => searchResult.moveToPrevPage()],
   [['/'], () => searchResult.focusInput()],
-  [['g'], () => metaSearch.setLeaderKey()]
+  [['g'], () => metaSearch.setLeaderKey()],
+  [['n'], () => searchResult.openInNew()]
 ]
 
 const nextKeyDefs: KeyDefs = [

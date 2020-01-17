@@ -102,4 +102,10 @@ export class SearchResults {
   resetFocus() {
     return this.focusItem(0)
   }
+  openInNew() {
+    const focusedElement = document.querySelector('a:focus')
+    if (!focusedElement) return
+    const href = (focusedElement as HTMLAnchorElement).href
+    window.open(href, '_blank')
+  }
 }
