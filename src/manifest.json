@@ -21,7 +21,6 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.g.cn/search?*",
         "*://*.google.ac/search?*",
         "*://*.google.ad/search?*",
         "*://*.google.ae/search?*",
@@ -74,6 +73,7 @@
         "*://*.google.co.za/search?*",
         "*://*.google.co.zm/search?*",
         "*://*.google.co.zw/search?*",
+        "*://*.google.com/search?*",
         "*://*.google.com.af/search?*",
         "*://*.google.com.ag/search?*",
         "*://*.google.com.ai/search?*",
@@ -133,7 +133,6 @@
         "*://*.google.com.uy/search?*",
         "*://*.google.com.vc/search?*",
         "*://*.google.com.vn/search?*",
-        "*://*.google.com/search?*",
         "*://*.google.cv/search?*",
         "*://*.google.cz/search?*",
         "*://*.google.de/search?*",
