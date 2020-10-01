@@ -83,7 +83,7 @@ export class SearchResults {
     target.focus()
 
     const content = `${this.focusIndex + 1}/${links.length} ▶`
-    this.style.innerHTML = `a:focus::before {
+    this.style.innerHTML = `.g a:focus::before {
       content: "${content}";
       font-size: 16px;
       white-space: nowrap;
