@@ -1,36 +1,3 @@
-const anchorSelector = (container: string) =>
-  `#search ${container} > a:first-of-type`
-
-const linkWrappers = ['g-link', '.r']
-
-const ignoreWrappers = [
-  'table',
-  'g-inner-card',
-  'g-expandable-container',
-  'g-accordion-expander',
-  'g-scrolling-carousel'
-]
-
-const linkSelector = linkWrappers
-  .map(container => anchorSelector(container))
-  .join(',')
-
-const ignoreSelector = linkWrappers
-  .reduce(
-    (acc: string[], container) => [
-      ...acc,
-      ...ignoreWrappers.map(ignoreWrapper =>
-        anchorSelector(`${ignoreWrapper} ${container}`)
-      )
-    ],
-    []
-  )
-  .join(',')
-
-const focusSelector = linkWrappers
-  .map(container => `${anchorSelector(container)}:focus::before`)
-  .join(',')
-
 export class SearchResults {
   private focusIndex = 0
   private style: HTMLStyleElement
@@ -42,10 +9,28 @@ export class SearchResults {
   }
 
   get links(): HTMLAnchorElement[] {
-    const linkList = Array.from(document.querySelectorAll(linkSelector))
-    const ignoreList = Array.from(document.querySelectorAll(ignoreSelector))
-    const filteredList = linkList.filter(item => !ignoreList.includes(item))
-    return filteredList as HTMLAnchorElement[]
+    // get elements both of g-link and h3 for keep order
+    const gLinkAndH3List = Array.from(
+      document.querySelectorAll(
+        '#search g-link > a:first-of-type, #search a > h3'
+      )
+    )
+
+    // extract anchor elements
+    const anchorList = gLinkAndH3List.reduce((acc: HTMLAnchorElement[], el) => {
+      if (el.tagName === 'H3') {
+        // a > h3 -> a
+        acc.push(el.parentElement as HTMLAnchorElement)
+      } else {
+        // g-link > a
+        if (el.children.length === 0) {
+          acc.push(el as HTMLAnchorElement)
+        }
+      }
+      return acc
+    }, [])
+
+    return anchorList as HTMLAnchorElement[]
   }
   get searchInput(): HTMLInputElement | null {
     return document.querySelector('input[name="q"][type="text"]')
@@ -69,7 +54,15 @@ export class SearchResults {
     target.focus()
 
     const content = `${this.focusIndex + 1}/${links.length} ▶`
-    this.style.innerHTML = `${focusSelector}{ content: "${content}"}`
+    this.style.innerHTML = `a:focus::before {
+      content: "${content}";
+      font-size: 16px;
+      white-space: nowrap;
+      position: absolute;
+      right: 100%;
+      top: 0;
+      transform: translate(-8px);
+    }`
     return target
   }
   focusNext() {
