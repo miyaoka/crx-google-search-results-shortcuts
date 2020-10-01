@@ -2,26 +2,13 @@ $focusColor: 0px 0px 0px 4px rgba(26, 13, 171, 0.1);
 $focusTransform: translate(-1em, -0.1em);
 $focusTransition: ease-out 0.1s;
 
-#search {
-  g-link,
-  .r {
-    & > a {
-      outline: none;
-
-      &:focus::before {
-        outline: none;
-        position: absolute;
-        left: -4px;
-        font-size: 16px;
-        transform: translateX(-100%);
-        content: '▶';
-      }
-    }
-
-    &:focus-within {
-      transform: $focusTransform;
-      transition: $focusTransition;
-      overflow: visible !important;
-    }
+a:focus {
+  outline: none;
+  position: relative;
+  display: inline-block;
+  transform: $focusTransform;
+  transition: $focusTransition;
+  cite {
+    white-space: nowrap;
   }
 }
