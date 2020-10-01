@@ -1,3 +1,11 @@
+const ignoreWrapperList = [
+  'table',
+  'g-inner-card',
+  'g-expandable-container',
+  'g-accordion-expander',
+  'g-scrolling-carousel'
+]
+
 export class SearchResults {
   private focusIndex = 0
   private style: HTMLStyleElement
@@ -9,26 +17,47 @@ export class SearchResults {
   }
 
   get links(): HTMLAnchorElement[] {
+    const selectorList = ['g-link > a:first-of-type', 'a > h3']
+
     // get elements both of g-link and h3 for keep order
     const gLinkAndH3List = Array.from(
       document.querySelectorAll(
-        '#search g-link > a:first-of-type, #search a > h3'
+        selectorList.map(selector => `#search ${selector}`).join(`,`)
       )
     )
 
+    const ignoreElementList = Array.from(
+      document.querySelectorAll(
+        ignoreWrapperList
+          .map(wrapper =>
+            selectorList
+              .map(selector => `#search ${wrapper} ${selector}`)
+              .join(`,`)
+          )
+          .join(`,`)
+      )
+    )
+
+    const filteredElementList = gLinkAndH3List.filter(
+      el => !ignoreElementList.includes(el)
+    )
+
     // extract anchor elements
-    const anchorList = gLinkAndH3List.reduce((acc: HTMLAnchorElement[], el) => {
-      if (el.tagName === 'H3') {
-        // a > h3 -> a
-        acc.push(el.parentElement as HTMLAnchorElement)
-      } else {
-        // g-link > a
-        if (el.children.length === 0) {
-          acc.push(el as HTMLAnchorElement)
+    const anchorList = filteredElementList.reduce(
+      (acc: HTMLAnchorElement[], el) => {
+        if (el.tagName === 'H3') {
+          // a > h3 -> a
+          acc.push(el.parentElement as HTMLAnchorElement)
+        } else {
+          // g-link > a
+          if (el.children.length === 0) {
+            acc.push(el as HTMLAnchorElement)
+          }
         }
-      }
-      return acc
-    }, [])
+        return acc
+      },
+      []
+    )
 
     return anchorList as HTMLAnchorElement[]
   }
