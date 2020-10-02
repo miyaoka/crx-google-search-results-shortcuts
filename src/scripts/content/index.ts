@@ -106,10 +106,15 @@ const activateKeyHandler = (isActive: boolean) => {
 const init = () => {
   // if (searchResult.isEmpty) return
   const formInputs = document.querySelectorAll('input, textarea')
+  const h3 = document.querySelectorAll('h3')
 
   formInputs.forEach(el => {
     el.addEventListener('focusin', () => activateKeyHandler(false))
     el.addEventListener('focusout', () => activateKeyHandler(true))
+  })
+
+  h3.forEach(el => {
+    el.closest('a')?.setAttribute('data-gsrks-focused', '')
   })
 
   activateKeyHandler(true)
