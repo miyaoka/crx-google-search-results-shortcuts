@@ -14,6 +14,10 @@ export class SearchResults {
     const style = document.createElement('style')
     document.body.appendChild(style)
     this.style = style
+
+    this.links.forEach(el => {
+      el.setAttribute('data-gsrks-focused', '')
+    })
   }
 
   get links(): HTMLAnchorElement[] {
