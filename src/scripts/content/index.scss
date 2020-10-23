@@ -2,7 +2,7 @@ $focusColor: 0px 0px 0px 4px rgba(26, 13, 171, 0.1);
 $focusTransform: translate(-1em, -0.1em);
 $focusTransition: ease-out 0.1s;
 
-[data-gsrks-focused]:focus {
+[data-gsrks-anchor]:focus {
   outline: none;
   position: relative;
   display: inline-block;

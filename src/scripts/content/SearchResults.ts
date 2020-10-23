@@ -16,7 +16,7 @@ export class SearchResults {
     this.style = style
 
     this.links.forEach(el => {
-      el.setAttribute('data-gsrks-focused', '')
+      el.setAttribute('data-gsrks-anchor', '')
     })
   }
 
@@ -87,7 +87,7 @@ export class SearchResults {
     target.focus()
 
     const content = `${this.focusIndex + 1}/${links.length} ▶`
-    this.style.innerHTML = `[data-gsrks-focused]:focus::before {
+    this.style.innerHTML = `[data-gsrks-anchor]:focus::before {
       content: "${content}";
     }`
     return target
