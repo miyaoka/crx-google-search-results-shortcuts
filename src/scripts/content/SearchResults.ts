@@ -85,12 +85,6 @@ export class SearchResults {
     const content = `${this.focusIndex + 1}/${links.length} ▶`
     this.style.innerHTML = `[data-gsrks-focused]:focus::before {
       content: "${content}";
-      font-size: 16px;
-      white-space: nowrap;
-      position: absolute;
-      right: 100%;
-      top: 0;
-      transform: translate(-8px);
     }`
     return target
   }
