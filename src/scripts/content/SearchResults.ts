@@ -14,6 +14,10 @@ export class SearchResults {
     const style = document.createElement('style')
     document.body.appendChild(style)
     this.style = style
+
+    this.links.forEach(el => {
+      el.setAttribute('data-gsrks-anchor', '')
+    })
   }
 
   get links(): HTMLAnchorElement[] {
@@ -83,14 +87,8 @@ export class SearchResults {
     target.focus()
 
     const content = `${this.focusIndex + 1}/${links.length} ▶`
-    this.style.innerHTML = `a:focus::before {
+    this.style.innerHTML = `[data-gsrks-anchor]:focus::before {
       content: "${content}";
-      font-size: 16px;
-      white-space: nowrap;
-      position: absolute;
-      right: 100%;
-      top: 0;
-      transform: translate(-8px);
     }`
     return target
   }

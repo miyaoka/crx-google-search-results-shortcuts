@@ -2,7 +2,7 @@ $focusColor: 0px 0px 0px 4px rgba(26, 13, 171, 0.1);
 $focusTransform: translate(-1em, -0.1em);
 $focusTransition: ease-out 0.1s;
 
-a:focus {
+[data-gsrks-anchor]:focus {
   outline: none;
   position: relative;
   display: inline-block;
@@ -10,5 +10,13 @@ a:focus {
   transition: $focusTransition;
   cite {
     white-space: nowrap;
+  }
+  &::before{
+    font-size: 16px;
+    white-space: nowrap;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    transform: translate(-8px);
   }
 }

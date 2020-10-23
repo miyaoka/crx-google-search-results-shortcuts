@@ -104,7 +104,6 @@ const activateKeyHandler = (isActive: boolean) => {
 }
 
 const init = () => {
-  // if (searchResult.isEmpty) return
   const formInputs = document.querySelectorAll('input, textarea')
 
   formInputs.forEach(el => {
