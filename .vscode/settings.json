@@ -1,20 +1,8 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "eslint.validate": [
-    "vue",
-    "html",
-    "javascript",
-    "typescript",
-    "javascriptreact",
-    "typescriptreact"
-  ],
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "files.eol": "\n",
   "json.schemas": [
     {
-      "fileMatch": ["/manifest.json"],
+      "fileMatch": ["/src/manifest.json"],
       "url": "http://json.schemastore.org/chrome-manifest"
     }
   ]
