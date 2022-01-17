@@ -86,10 +86,6 @@ export class SearchResults {
     const target = links[this.focusIndex]
     target.focus()
 
-    const content = `${this.focusIndex + 1}/${links.length} ▶`
-    this.style.innerHTML = `[data-gsrks-anchor]:focus::before {
-      content: "${content}";
-    }`
     return target
   }
   focusNext() {
