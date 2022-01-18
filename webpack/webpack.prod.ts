@@ -11,10 +11,21 @@ export default merge(commonConfig, {
         from: './src/manifest.json',
         to: '.',
         transform: (content: Buffer) => {
-          const manifest = JSON.parse(content.toString())
-          return JSON.stringify({ ...manifest, version: pkg.version }, null, 2)
-        }
-      }
-    ])
-  ]
+          // eslint-disable-next-line
+          const { content_security_policy, ...manifest } = JSON.parse(
+            content.toString()
+          )
+
+          return JSON.stringify(
+            {
+              ...manifest,
+              version: pkg.version,
+            },
+            null,
+            2
+          )
+        },
+      },
+    ]),
+  ],
 })
