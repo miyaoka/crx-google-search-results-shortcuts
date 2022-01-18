@@ -6,11 +6,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node -T build.ts",
-    "build": "yarn clear && webpack --config webpack/webpack.prod.ts",
-    "clear": "rimraf ./dist",
+    "dev": "ts-node -T build.ts --dev",
+    "build": "ts-node -T build.ts",
     "lint": "eslint --ext .ts,.js,json --ignore-path .gitignore .",
-    "test": "jest",
     "zip": "bestzip dist.zip dist/"
   },
   "devDependencies": {

@@ -10,7 +10,8 @@ if (fs.existsSync(distDir)) {
   fs.rmSync(distDir, { recursive: true });
 }
 
-const isWatching = true;
+const argv = process.argv.slice(2);
+const isWatching = argv.includes('--dev');
 
 // build scripts
 build({
