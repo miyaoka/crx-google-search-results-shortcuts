@@ -5,11 +5,13 @@ import chokidar from 'chokidar';
 import fs from 'fs';
 
 const distDir = path.resolve('./dist');
-const staticDir = path.resolve('./src/static');
 if (fs.existsSync(distDir)) {
   fs.rmSync(distDir, { recursive: true });
 }
+const staticDir = path.resolve('./src/static');
+const manifestPath = path.resolve('./src/manifest.json');
 
+// options
 const argv = process.argv.slice(2);
 const isWatching = argv.includes('--dev');
 
@@ -41,3 +43,12 @@ chokidar
   });
 
 // build manifest
+chokidar.watch(manifestPath, { persistent: isWatching }).on('all', evt => {
+  if (!/^(add|change)$/.test(evt)) return;
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  fs.writeFileSync(
+    path.join(distDir, 'manifest.json'),
+    JSON.stringify({ ...manifest, version: pkg.version }, null, 2)
+  );
+});
