@@ -4,6 +4,7 @@ const ignoreWrapperList = [
   "g-expandable-container",
   "g-accordion-expander",
   "g-scrolling-carousel",
+  "[jscontroller]",
 ];
 
 let focusedIndex = 0;
