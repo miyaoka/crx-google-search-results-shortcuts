@@ -5,9 +5,9 @@ import { MetaSearch } from "./MetaSearch";
 const searchResult = new SearchResults();
 const metaSearch = new MetaSearch();
 
-type KeyDefs = [(string | string[])[], () => void][];
+type KeyDef = [(string | string[])[], () => HTMLAnchorElement | null | void];
 
-const keyDefs: KeyDefs = [
+const firstKeyDefs: KeyDef[] = [
   [["ArrowDown", "j"], () => searchResult.focusNext()],
   [["ArrowUp", "k"], () => searchResult.focusPrev()],
   [["ArrowRight", "l"], () => searchResult.moveToNextPage()],
@@ -15,7 +15,7 @@ const keyDefs: KeyDefs = [
   [["g"], () => metaSearch.setLeaderKey()],
 ];
 
-const nextKeyDefs: KeyDefs = [
+const nextKeyDefs: KeyDef[] = [
   [["a"], () => metaSearch.searchAll()],
   [["i"], () => metaSearch.searchImage()],
   [["m"], () => metaSearch.searchMap()],
@@ -35,18 +35,18 @@ const combineKey = (keys: string[]) =>
     .map((key) => key.toLowerCase())
     .sort()
     .join("-");
-const createKeyMap = (keyDefs: KeyDefs): [RegExp, () => void][] => {
+const createKeyMap = (keyDefs: KeyDef[]) => {
   return keyDefs.map(([keyCombos, action]) => {
     const pattern = keyCombos
       .map((keyCombo) =>
         Array.isArray(keyCombo) ? combineKey(keyCombo) : keyCombo
       )
       .join("|");
-    return [new RegExp(`^(${pattern})$`, "i"), action];
+    return [new RegExp(`^(${pattern})$`, "i"), action] as const;
   });
 };
 
-const keymap = createKeyMap(keyDefs);
+const firstKeymap = createKeyMap(firstKeyDefs);
 const nextKeymap = createKeyMap(nextKeyDefs);
 const modKeyReg = /^(shift|alt|control|meta)$/i;
 
@@ -84,7 +84,7 @@ const onKeyDown = (e: KeyboardEvent) => {
     if (matched) return;
   }
 
-  keymap.some(([keyReg, action]) => {
+  firstKeymap.some(([keyReg, action]) => {
     if (!keyReg.test(code)) return false;
     if (action()) {
       e.preventDefault();
