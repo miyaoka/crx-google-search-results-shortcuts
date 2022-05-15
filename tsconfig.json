@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "esModuleInterop": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
     "strict": true,
-    "baseUrl": ".",
+    "sourceMap": true,
     "resolveJsonModule": true,
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "paths": {
-      "~/*": ["./src/*"]
-    }
-  }
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true
+  },
+  "include": ["src"]
 }
