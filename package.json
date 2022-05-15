@@ -8,12 +8,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint \"src/**/*.{ts,js}\""
+    "lint": "eslint \"src/**/*.{ts,js}\"",
+    "zip": "bestzip dist.zip dist/"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
+    "bestzip": "^2.2.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
