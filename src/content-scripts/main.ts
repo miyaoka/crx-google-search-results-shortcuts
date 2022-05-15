@@ -17,7 +17,7 @@ import {
   searchVideo,
 } from "./searchType";
 
-type KeyDef = [(string | string[])[], () => any];
+type KeyDef = [(string | string[])[], () => void | boolean];
 
 const firstKeyDefs: KeyDef[] = [
   [["ArrowDown", "j"], () => focusNext()],
@@ -99,8 +99,11 @@ const onKeyDown = (e: KeyboardEvent) => {
 
   firstKeymap.some(([keyReg, action]) => {
     if (!keyReg.test(code)) return false;
-    action();
-    e.preventDefault();
+
+    // ページ上部や下部にスクロールするため、処理が成功したときだけキー入力を取り消す
+    if (action()) {
+      e.preventDefault();
+    }
     return true;
   });
 };

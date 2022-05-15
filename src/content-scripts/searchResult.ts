@@ -66,22 +66,22 @@ const getLinks = (): HTMLAnchorElement[] => {
   return anchorList as HTMLAnchorElement[];
 };
 
-const getNextPage = (): HTMLAnchorElement | null => {
+const getNextPageLink = (): HTMLAnchorElement | null => {
   return document.querySelector("#pnnext");
 };
-const getPrevPage = (): HTMLAnchorElement | null => {
+const getPrevPageLink = (): HTMLAnchorElement | null => {
   return document.querySelector("#pnprev");
 };
 
 const focusItem = (index: number) => {
   const inRange = index >= 0 && index < focusTargetList.length;
-  if (!inRange) return null;
+  if (!inRange) return false;
 
   focusedIndex = index;
   const target = focusTargetList[focusedIndex];
   target.focus();
 
-  return target;
+  return true;
 };
 
 export const focusNext = () => {
@@ -92,10 +92,18 @@ export const focusPrev = () => {
 };
 
 export const moveToNextPage = () => {
-  return getNextPage()?.click();
+  const link = getNextPageLink();
+  if (!link) return false;
+
+  link.click();
+  return true;
 };
 export const moveToPrevPage = () => {
-  return getPrevPage()?.click();
+  const link = getPrevPageLink();
+  if (!link) return false;
+
+  link.click();
+  return true;
 };
 
 export const resetFocus = () => {
