@@ -12,7 +12,6 @@ const keyDefs: KeyDefs = [
   [["ArrowUp", "k"], () => searchResult.focusPrev()],
   [["ArrowRight", "l"], () => searchResult.moveToNextPage()],
   [["ArrowLeft", "h"], () => searchResult.moveToPrevPage()],
-  [["/"], () => searchResult.focusInput()],
   [["g"], () => metaSearch.setLeaderKey()],
 ];
 
