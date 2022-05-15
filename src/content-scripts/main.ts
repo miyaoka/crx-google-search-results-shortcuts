@@ -1,33 +1,47 @@
 import "./index.css";
-import { SearchResults } from "./SearchResults";
-import { MetaSearch } from "./MetaSearch";
 
-const searchResult = new SearchResults();
-const metaSearch = new MetaSearch();
+import {
+  setupFocusTarget,
+  focusNext,
+  focusPrev,
+  moveToNextPage,
+  moveToPrevPage,
+  resetFocus,
+} from "./searchResult";
+import {
+  searchAll,
+  searchImage,
+  searchMap,
+  searchNews,
+  searchVerbatim,
+  searchVideo,
+} from "./searchType";
 
-type KeyDef = [(string | string[])[], () => HTMLAnchorElement | null | void];
+type KeyDef = [(string | string[])[], () => any];
 
 const firstKeyDefs: KeyDef[] = [
-  [["ArrowDown", "j"], () => searchResult.focusNext()],
-  [["ArrowUp", "k"], () => searchResult.focusPrev()],
-  [["ArrowRight", "l"], () => searchResult.moveToNextPage()],
-  [["ArrowLeft", "h"], () => searchResult.moveToPrevPage()],
-  [["g"], () => metaSearch.setLeaderKey()],
+  [["ArrowDown", "j"], () => focusNext()],
+  [["ArrowUp", "k"], () => focusPrev()],
+  [["ArrowRight", "l"], () => moveToNextPage()],
+  [["ArrowLeft", "h"], () => moveToPrevPage()],
+  [["g"], () => (isLeaderKeyActive = true)],
 ];
 
-const nextKeyDefs: KeyDef[] = [
-  [["a"], () => metaSearch.searchAll()],
-  [["i"], () => metaSearch.searchImage()],
-  [["m"], () => metaSearch.searchMap()],
-  [["v"], () => metaSearch.searchVideo()],
-  [["n"], () => metaSearch.searchNews()],
-  [[["shift", "V"]], () => metaSearch.searchVerbatim()],
+let isLeaderKeyActive = false;
 
-  // [['h'], () => metaSearch.searchByTime('qdr_h')],
-  // [['d'], () => metaSearch.searchByTime('qdr_d')],
-  // [['w'], () => metaSearch.searchByTime('qdr_w')],
-  // [['m'], () => metaSearch.searchByTime('qdr_m')],
-  // [['y'], () => metaSearch.searchByTime('qdr_y')],
+const nextKeyDefs: KeyDef[] = [
+  [["a"], () => searchAll()],
+  [["i"], () => searchImage()],
+  [["m"], () => searchMap()],
+  [["v"], () => searchVideo()],
+  [["n"], () => searchNews()],
+  [[["shift", "V"]], () => searchVerbatim()],
+
+  // [['h'], () => searchByTime('qdr_h')],
+  // [['d'], () => searchByTime('qdr_d')],
+  // [['w'], () => searchByTime('qdr_w')],
+  // [['m'], () => searchByTime('qdr_m')],
+  // [['y'], () => searchByTime('qdr_y')],
 ];
 
 const combineKey = (keys: string[]) =>
@@ -71,13 +85,12 @@ const onKeyDown = (e: KeyboardEvent) => {
 
   const code = getCombinedKeyCode(e);
 
-  if (metaSearch.isLeaderKey) {
-    metaSearch.isLeaderKey = false;
+  if (isLeaderKeyActive) {
+    isLeaderKeyActive = false;
     const matched = nextKeymap.some(([keyReg, action]) => {
       if (!keyReg.test(code)) return false;
-      if (action()) {
-        e.preventDefault();
-      }
+      action();
+      e.preventDefault();
       return true;
     });
 
@@ -86,9 +99,8 @@ const onKeyDown = (e: KeyboardEvent) => {
 
   firstKeymap.some(([keyReg, action]) => {
     if (!keyReg.test(code)) return false;
-    if (action()) {
-      e.preventDefault();
-    }
+    action();
+    e.preventDefault();
     return true;
   });
 };
@@ -96,13 +108,14 @@ const onKeyDown = (e: KeyboardEvent) => {
 const activateKeyHandler = (isActive: boolean) => {
   if (isActive) {
     document.addEventListener("keydown", onKeyDown);
-    searchResult.resetFocus();
+    resetFocus();
   } else {
     document.removeEventListener("keydown", onKeyDown);
   }
 };
 
 const init = () => {
+  setupFocusTarget();
   const formInputs = document.querySelectorAll("input, textarea");
 
   formInputs.forEach((el) => {
