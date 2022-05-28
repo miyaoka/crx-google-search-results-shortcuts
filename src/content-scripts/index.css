@@ -17,3 +17,6 @@
   height: 16px;
   content: "";
 }
+[data-gsrks-anchor]:focus cite {
+  white-space: nowrap;
+}
