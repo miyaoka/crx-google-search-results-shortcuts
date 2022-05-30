@@ -12,15 +12,15 @@
     "zip": "bestzip dist.zip dist/"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^1.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "@typescript-eslint/parser": "^5.23.0",
+    "@crxjs/vite-plugin": "^1.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
     "bestzip": "^2.2.1",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2",
-    "typescript": "^4.6.2",
-    "vite": "^2.8.6"
+    "typescript": "^4.7.2",
+    "vite": "^2.9.9"
   }
 }
