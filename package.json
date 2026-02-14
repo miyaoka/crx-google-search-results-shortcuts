@@ -1,11 +1,11 @@
 {
   "name": "google-search-results-shortcuts",
-  "private": true,
   "version": "1.5.0",
-  "type": "module",
+  "private": true,
   "description": "Keyboard shortcuts for google search results",
-  "author": "Masaya Kazama <miyan@t-p.jp>",
   "license": "MIT",
+  "author": "Masaya Kazama <miyan@t-p.jp>",
+  "type": "module",
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
@@ -14,11 +14,16 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
+    "lint": "oxlint && oxfmt --check",
+    "fix": "oxlint --fix && oxfmt",
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
     "@wxt-dev/auto-icons": "^1.1.0",
-    "typescript": "4.7.4",
+    "lefthook": "^2.1.1",
+    "oxfmt": "^0.32.0",
+    "oxlint": "^1.47.0",
+    "typescript": "5.9.3",
     "wxt": "^0.20.17"
   }
 }

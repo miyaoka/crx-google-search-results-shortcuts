@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: fix
+      glob: "*.{ts,css,json}"
+      run: pnpm exec oxlint --fix {staged_files} && pnpm exec oxfmt {staged_files}
+      stage_fixed: true
