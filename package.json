@@ -2,25 +2,23 @@
   "name": "google-search-results-shortcuts",
   "private": true,
   "version": "1.5.0",
+  "type": "module",
   "description": "Keyboard shortcuts for google search results",
   "author": "Masaya Kazama <miyan@t-p.jp>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint \"src/**/*.{ts,js}\"",
-    "zip": "bestzip dist.zip dist/"
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "1.0.12",
-    "@typescript-eslint/eslint-plugin": "5.30.6",
-    "@typescript-eslint/parser": "5.30.6",
-    "bestzip": "2.2.1",
-    "eslint": "8.19.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "4.2.1",
-    "prettier": "2.7.1",
+    "@wxt-dev/auto-icons": "^1.1.0",
     "typescript": "4.7.4",
-    "vite": "3.0.0"
+    "wxt": "^0.20.17"
   }
 }
