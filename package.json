@@ -13,7 +13,7 @@
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
-    "compile": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "lint": "oxlint && oxfmt --check",
     "fix": "oxlint --fix && oxfmt",
     "postinstall": "wxt prepare"
