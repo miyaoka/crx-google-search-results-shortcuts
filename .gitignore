@@ -5,3 +5,5 @@
 node_modules
 dist
 dist.zip
+.wxt/
+.output/
