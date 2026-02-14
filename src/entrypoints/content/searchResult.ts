@@ -25,43 +25,34 @@ const getLinks = (): HTMLAnchorElement[] => {
 
   // get elements both of g-link and h3 for keep order
   const gLinkAndH3List = Array.from(
-    document.querySelectorAll(
-      selectorList.map((selector) => `#search ${selector}`).join(`,`)
-    )
+    document.querySelectorAll(selectorList.map((selector) => `#search ${selector}`).join(`,`)),
   );
 
   const ignoreElementList = Array.from(
     document.querySelectorAll(
       ignoreWrapperList
         .map((wrapper) =>
-          selectorList
-            .map((selector) => `#search ${wrapper} ${selector}`)
-            .join(`,`)
+          selectorList.map((selector) => `#search ${wrapper} ${selector}`).join(`,`),
         )
-        .join(`,`)
-    )
+        .join(`,`),
+    ),
   );
 
-  const filteredElementList = gLinkAndH3List.filter(
-    (el) => !ignoreElementList.includes(el)
-  );
+  const filteredElementList = gLinkAndH3List.filter((el) => !ignoreElementList.includes(el));
 
   // extract anchor elements
-  const anchorList = filteredElementList.reduce(
-    (acc: HTMLAnchorElement[], el) => {
-      if (el.tagName === "H3") {
-        // a > h3 -> a
-        acc.push(el.parentElement as HTMLAnchorElement);
-      } else {
-        // g-link > a
-        if (el.children.length === 0) {
-          acc.push(el as HTMLAnchorElement);
-        }
+  const anchorList = filteredElementList.reduce((acc: HTMLAnchorElement[], el) => {
+    if (el.tagName === "H3") {
+      // a > h3 -> a
+      acc.push(el.parentElement as HTMLAnchorElement);
+    } else {
+      // g-link > a
+      if (el.children.length === 0) {
+        acc.push(el as HTMLAnchorElement);
       }
-      return acc;
-    },
-    []
-  );
+    }
+    return acc;
+  }, []);
 
   return anchorList as HTMLAnchorElement[];
 };
