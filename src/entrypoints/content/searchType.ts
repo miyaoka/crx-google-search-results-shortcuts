@@ -4,7 +4,7 @@ const changeParam = (newParams: Record<string, string>) => {
   const url = new URL(document.location.href);
   const params = url.searchParams;
   Object.entries({ ...defaultParams, ...newParams }).forEach(([key, value]) =>
-    params.set(key, value)
+    params.set(key, value),
   );
   location.href = url.href;
 };

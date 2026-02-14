@@ -1,6 +1,7 @@
 import { defineConfig } from "wxt";
 
 export default defineConfig({
+  srcDir: "src",
   modules: ["@wxt-dev/auto-icons"],
   manifest: {
     name: "__MSG_extName__",

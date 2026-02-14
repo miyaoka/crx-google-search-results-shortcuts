@@ -52,9 +52,7 @@ const combineKey = (keys: string[]) =>
 const createKeyMap = (keyDefs: KeyDef[]) => {
   return keyDefs.map(([keyCombos, action]) => {
     const pattern = keyCombos
-      .map((keyCombo) =>
-        Array.isArray(keyCombo) ? combineKey(keyCombo) : keyCombo
-      )
+      .map((keyCombo) => (Array.isArray(keyCombo) ? combineKey(keyCombo) : keyCombo))
       .join("|");
     return [new RegExp(`^(${pattern})$`, "i"), action] as const;
   });
@@ -75,7 +73,7 @@ const getCombinedKeyCode = (e: KeyboardEvent) => {
     (acc: string[], [key, isHolding]) => {
       return isHolding ? [...acc, key] : acc;
     },
-    [e.key]
+    [e.key],
   );
   return combineKey(keys);
 };
