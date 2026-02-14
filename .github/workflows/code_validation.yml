@@ -1,0 +1,50 @@
+name: code_validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validation:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: typecheck
+            command: pnpm run typecheck
+
+          - name: lint
+            command: pnpm run lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run ${{ matrix.name }}
+        run: ${{ matrix.command }}
+
+  all-green:
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - validation
+    steps:
+      - name: Check all CI jobs status
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
