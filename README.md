@@ -9,25 +9,25 @@ A browser extension that adds keyboard navigation to Google search results. Navi
 
 ### Navigation
 
-| Key | Action |
-| --- | --- |
-| <kbd>J</kbd> / <kbd>↓</kbd> | Focus next search result |
+| Key                         | Action                       |
+| --------------------------- | ---------------------------- |
+| <kbd>J</kbd> / <kbd>↓</kbd> | Focus next search result     |
 | <kbd>K</kbd> / <kbd>↑</kbd> | Focus previous search result |
-| <kbd>L</kbd> / <kbd>→</kbd> | Go to next page |
-| <kbd>H</kbd> / <kbd>←</kbd> | Go to previous page |
-| <kbd>/</kbd> | Focus search input |
+| <kbd>L</kbd> / <kbd>→</kbd> | Go to next page              |
+| <kbd>H</kbd> / <kbd>←</kbd> | Go to previous page          |
+| <kbd>/</kbd>                | Focus search input           |
 
 ### Switch Search Type (Leader key: <kbd>G</kbd>)
 
 Press <kbd>G</kbd> followed by one of the keys below to switch the search type.
 
-| Key | Action |
-| --- | --- |
-| <kbd>A</kbd> | All |
-| <kbd>I</kbd> | Images |
-| <kbd>V</kbd> | Videos |
-| <kbd>M</kbd> | Maps |
-| <kbd>N</kbd> | News |
+| Key                           | Action                 |
+| ----------------------------- | ---------------------- |
+| <kbd>A</kbd>                  | All                    |
+| <kbd>I</kbd>                  | Images                 |
+| <kbd>V</kbd>                  | Videos                 |
+| <kbd>M</kbd>                  | Maps                   |
+| <kbd>N</kbd>                  | News                   |
 | <kbd>Shift</kbd>+<kbd>V</kbd> | Verbatim (exact match) |
 
 > [!NOTE]
