@@ -2,6 +2,6 @@ pre-commit:
   parallel: true
   jobs:
     - name: fix
-      glob: "*.{ts,css,json}"
+      glob: "*.{ts,css,json,md}"
       run: pnpm exec oxlint --fix --type-aware {staged_files} && pnpm exec oxfmt {staged_files}
       stage_fixed: true
