@@ -13,7 +13,7 @@ importers:
         version: 7.0.0-dev.20260222.1
       '@wxt-dev/auto-icons':
         specifier: 1.1.0
-        version: 1.1.0(wxt@0.20.17(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0))
+        version: 1.1.0(wxt@0.20.18(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0))
       lefthook:
         specifier: 2.1.1
         version: 2.1.1
@@ -30,8 +30,8 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       wxt:
-        specifier: 0.20.17
-        version: 0.20.17(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0)
+        specifier: 0.20.18
+        version: 0.20.18(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0)
 
 packages:
 
@@ -2235,8 +2235,8 @@ packages:
     resolution: {integrity: sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==}
     engines: {node: '>=20'}
 
-  wxt@0.20.17:
-    resolution: {integrity: sha512-3M3og5cKYTGBoBkVbHO+Qjq+SpGQxNkcFe2YZFZjWw8QcIgmCpyxrAsvOGvzXtn7KerxHDf5VvEvf/OvlGzhFg==}
+  wxt@0.20.18:
+    resolution: {integrity: sha512-BYnIAFkdJcC8BXzbh4PzmRhOQ5xKELEk45qntzqojW5X1+VGm0GsjaEKSCQnTP72/3jZMDH1pmlEdkY/fPXehg==}
     hasBin: true
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -2817,12 +2817,12 @@ snapshots:
 
   '@webext-core/match-patterns@1.0.3': {}
 
-  '@wxt-dev/auto-icons@1.1.0(wxt@0.20.17(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0))':
+  '@wxt-dev/auto-icons@1.1.0(wxt@0.20.18(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0))':
     dependencies:
       defu: 6.1.4
       fs-extra: 11.3.3
       sharp: 0.34.5
-      wxt: 0.20.17(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0)
+      wxt: 0.20.18(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0)
 
   '@wxt-dev/browser@0.1.37':
     dependencies:
@@ -4194,7 +4194,7 @@ snapshots:
       is-wsl: 3.1.1
       powershell-utils: 0.1.0
 
-  wxt@0.20.17(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0):
+  wxt@0.20.18(@types/node@25.3.0)(jiti@2.6.1)(rollup@4.59.0):
     dependencies:
       '@1natsu/wait-element': 4.1.2
       '@aklinker1/rollup-plugin-visualizer': 5.12.0(rollup@4.59.0)
