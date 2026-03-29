@@ -22,8 +22,8 @@
     "@typescript/native-preview": "7.0.0-dev.20260326.1",
     "@wxt-dev/auto-icons": "1.1.1",
     "lefthook": "2.1.4",
-    "oxfmt": "0.41.0",
-    "oxlint": "1.56.0",
+    "oxfmt": "0.42.0",
+    "oxlint": "1.57.0",
     "oxlint-tsgolint": "0.17.2",
     "typescript": "6.0.2",
     "wxt": "0.20.20"
