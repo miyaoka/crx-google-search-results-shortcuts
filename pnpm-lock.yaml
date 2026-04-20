@@ -1240,8 +1240,8 @@ packages:
       picomatch:
         optional: true
 
-  filesize@11.0.15:
-    resolution: {integrity: sha512-30TpbYxQxCpi4XdVjkwXYQ37CzZltV38+P7MYroQ+4NK/Dmx9mxixFNrolzcmEIBsjT/uowC9T7kiy2+C12r1A==}
+  filesize@11.0.16:
+    resolution: {integrity: sha512-XMcUu0Zxnh0L8rY5b5vrdKKs0H3l3osTp9vNEBulRmwLqYfuQe5SJCagpA0/sGMJx2KHbD+IWOyd6QsJQuYEkQ==}
     engines: {node: '>= 10.8.0'}
 
   firefox-profile@4.7.0:
@@ -3102,7 +3102,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.4
 
-  filesize@11.0.15: {}
+  filesize@11.0.16: {}
 
   firefox-profile@4.7.0:
     dependencies:
@@ -4119,7 +4119,7 @@ snapshots:
       defu: 6.1.7
       dotenv-expand: 12.0.3
       esbuild: 0.27.7
-      filesize: 11.0.15
+      filesize: 11.0.16
       get-port-please: 3.2.0
       giget: 3.2.0
       hookable: 6.1.1
