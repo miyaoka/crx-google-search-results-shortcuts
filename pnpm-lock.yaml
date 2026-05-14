@@ -13,7 +13,7 @@ importers:
         version: 7.0.0-dev.20260511.1
       '@wxt-dev/auto-icons':
         specifier: 1.1.1
-        version: 1.1.1(wxt@0.20.25(@types/node@25.6.2)(jiti@2.7.0))
+        version: 1.1.1(wxt@0.20.26(@types/node@25.6.2)(jiti@2.7.0))
       lefthook:
         specifier: 2.1.6
         version: 2.1.6
@@ -30,8 +30,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       wxt:
-        specifier: 0.20.25
-        version: 0.20.25(@types/node@25.6.2)(jiti@2.7.0)
+        specifier: 0.20.26
+        version: 0.20.26(@types/node@25.6.2)(jiti@2.7.0)
 
 packages:
 
@@ -2209,8 +2209,8 @@ packages:
     resolution: {integrity: sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==}
     engines: {node: '>=20'}
 
-  wxt@0.20.25:
-    resolution: {integrity: sha512-ca+8Yt0Auzn9tX0ZW2Kzocb9yM8F/RoOjcYQ0fHkwcSc7/IUkqV2+1JUNn1SMSNAS4Gr3YQHAn/pi3q+jIGRqw==}
+  wxt@0.20.26:
+    resolution: {integrity: sha512-PMGz7sAlONJgwBkOriInXOoEU6/jlGKrhSFvZfiBPHZocyYPfnw1lod9rGDra957H83WO+TnGjYwJiGYciSIqA==}
     engines: {bun: '>=1.2.0', node: '>=20.12.0'}
     hasBin: true
     peerDependencies:
@@ -2775,12 +2775,12 @@ snapshots:
 
   '@webext-core/match-patterns@1.0.3': {}
 
-  '@wxt-dev/auto-icons@1.1.1(wxt@0.20.25(@types/node@25.6.2)(jiti@2.7.0))':
+  '@wxt-dev/auto-icons@1.1.1(wxt@0.20.26(@types/node@25.6.2)(jiti@2.7.0))':
     dependencies:
       defu: 6.1.7
       fs-extra: 11.3.5
       sharp: 0.34.5
-      wxt: 0.20.25(@types/node@25.6.2)(jiti@2.7.0)
+      wxt: 0.20.26(@types/node@25.6.2)(jiti@2.7.0)
 
   '@wxt-dev/browser@0.1.42':
     dependencies:
@@ -4107,7 +4107,7 @@ snapshots:
       is-wsl: 3.1.1
       powershell-utils: 0.1.0
 
-  wxt@0.20.25(@types/node@25.6.2)(jiti@2.7.0):
+  wxt@0.20.26(@types/node@25.6.2)(jiti@2.7.0):
     dependencies:
       '@1natsu/wait-element': 4.2.0
       '@aklinker1/rollup-plugin-visualizer': 5.12.0
