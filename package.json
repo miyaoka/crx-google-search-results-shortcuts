@@ -19,7 +19,7 @@
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
-    "@typescript/native-preview": "7.0.0-dev.20260522.1",
+    "@typescript/native-preview": "7.0.0-dev.20260524.1",
     "@wxt-dev/auto-icons": "1.1.1",
     "lefthook": "2.1.8",
     "oxfmt": "0.51.0",
