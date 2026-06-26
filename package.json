@@ -26,6 +26,6 @@
     "oxlint": "1.71.0",
     "oxlint-tsgolint": "0.23.0",
     "typescript": "6.0.3",
-    "wxt": "0.20.26"
+    "wxt": "0.20.27"
   }
 }
